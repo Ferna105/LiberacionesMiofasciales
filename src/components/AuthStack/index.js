@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,TransitionPresets} from '@react-navigation/stack';
 
 import GenderSelection from './GenderSelection';
 import SportsSelection from './SportsSelection';
@@ -10,14 +10,20 @@ import { withTheme } from '../../core/themeProvider';
 
 const Stack = createStackNavigator();
 
-const AuthStack = props => {
+const AuthStack = ({theme}) => {
 
   return (
     <Stack.Navigator 
       drawerStyle={{}}
       screenOptions={{
-        headerShown: false
+        title: "Completa tu Perfil",
+        headerLeft: null,
+        headerStyle: theme.Header.style,
+        headerTintColor: theme.Header.tintColor,
+        headerTitleStyle: theme.Header.titleStyle,
+        ...TransitionPresets.SlideFromRightIOS,
       }}
+      headerMode="screen"
     >
       <Stack.Screen 
         name="GenderSelection" 

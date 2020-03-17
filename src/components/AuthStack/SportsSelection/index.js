@@ -1,39 +1,29 @@
 import * as React from 'react';
-import { Button, View, Text} from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { CheckBox } from 'react-native-elements';
 
 import { withTheme } from '@theme/themeProvider';
 
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman'
-  },
-];
 
 const StatusSelection = ({ navigation, theme }) => {
 
-
   return (
     <View {...theme.Container}>
-  		<Text {...theme.Text}>Seleccione el/los deporte/s que practica</Text>
-    	<View>
-    		<Text>Deporte</Text>
-    		<Text>Deporte</Text>
-    		<Text>Deporte</Text>
-    		<Text>Deporte</Text>
-    		<Text>Deporte</Text>
-    	</View>
-    	<Button
-      	{...theme.Button}
+      <View>
+        <Text {...theme.TextHeader}>¿Qué deporte practica?</Text>
+        <Text {...theme.Text}>En las rutinas de elongación se tienen en cuenta las cadenas musculares que son mayormente afectadas en cada deporte, favoreciendo el rendimiento del atleta</Text>
+        <CheckBox {...theme.CheckBox} checked={true} title="Fútbol" />
+        <CheckBox {...theme.CheckBox} checked={true} title="Hockey" />
+        <CheckBox {...theme.CheckBox} checked={true} title="Básquet" />
+      </View>
+      <TouchableOpacity
+        {...theme.TouchableOpacity}
         onPress={() => navigation.navigate('SuccessScreen',{sports: []})}
-        title="Siguiente"
-      />
+      >
+        <MaterialIcons {...theme.TouchableOpacityIcon} name="navigate-next" />
+        <Text {...theme.TouchableOpacityText}>Siguiente</Text>
+      </TouchableOpacity>
     </View>
   );
 }

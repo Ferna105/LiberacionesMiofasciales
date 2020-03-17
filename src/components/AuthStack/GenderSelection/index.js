@@ -1,23 +1,31 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
+import { Ionicons } from '@expo/vector-icons';
 
 const GenderSelection = ({ navigation, theme }) => {
 
   return (
     <View {...theme.Container}>
-  		<Text {...theme.Text}>Seleccione su sexo</Text>
+    	<View>
+	  		<Text {...theme.TextHeader}>Seleccione su sexo</Text>
+	  		<Text {...theme.Text}>El cuerpo de la mujer y el hombre tienen algunas diferencias anatómicas que van a influenciar en la rutina de elongación</Text>
+  		</View>
     	<View style={{flexDirection: "row"}}>
-	      <Button
-	      	{...theme.Button}
-	        onPress={() => navigation.navigate('StatusSelection',{gender: 'male'})}
-	        title="Hombre"
-	      />
-	      <Button
-	      	{...theme.Button}
+	      <TouchableOpacity
+	      	{...theme.TouchableOpacity}
 	        onPress={() => navigation.navigate('StatusSelection',{gender: 'female'})}
-	        title="Mujer"
-	      />
+	      >
+	      	<Ionicons {...theme.TouchableOpacityIcon} name="ios-woman" />
+	      	<Text {...theme.TouchableOpacityText}>Mujer</Text>
+	      </TouchableOpacity>
+	      <TouchableOpacity
+	      	{...theme.TouchableOpacity}
+	        onPress={() => navigation.navigate('StatusSelection',{gender: 'male'})}
+	      >
+	      	<Ionicons {...theme.TouchableOpacityIcon} name="ios-man" />
+	      	<Text {...theme.TouchableOpacityText}>Hombre</Text>
+	      </TouchableOpacity>
     	</View>
     </View>
   );

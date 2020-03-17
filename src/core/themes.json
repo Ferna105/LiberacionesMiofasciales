@@ -1,27 +1,69 @@
 [
   {
-    "key": "LIBERACION_MIOFACIAL_STANDARD",
-    "Container": {
+    key: "LIBERACION_MIOFACIAL_STANDARD",
+    Container: {
       style: {
         backgroundColor: "#e5dfdf",
         flex: 1, 
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: 20
       }
     },
-    "Header": {
+    Header: {
       style: {
-        backgroundColor: "#1b262c",
-        color: "#f4eeff",
+        backgroundColor: "#0f4c81",
+      },
+      tintColor: "#e5dfdf",
+      titleStyle: {
+        fontFamily: "Raleway-Bold"
       }
     },
-    "Button": {
-      "color": "#0f4c81",
+    Button: {
+      color: "#0f4c81",
     },
-    "Text": {
+    TouchableOpacity:{
       style: {
-        "color": "#1b262c",
-        "fontFamily": 'Raleway-Regular'
+        backgroundColor: "#0f4c81",
+        padding: 10,
+        borderRadius:5,
+        alignItems: "center",
+        margin: 10,
+        width: 100
+      },
+      activeOpacity: .5
+    },
+    TouchableOpacityText:{
+      style: {
+        color: "#e5dfdf",
+        fontFamily: "Raleway-Bold"
+      }
+    },
+    TouchableOpacityIcon: {
+      size: 40,
+      style: {
+        color: "#e5dfdf"
+      },
+    },
+    Text: {
+      style: {
+        color: "#1b262c",
+        fontFamily: 'Raleway-Regular',
+      }
+    },
+    TextHeader: {
+      style: {
+        color: "#1b262c",
+        fontFamily: 'Raleway-Bold',
+        fontSize: 17,
+      }
+    },
+    CheckBox: {
+      checkedColor: "#1b262c",
+      uncheckedColor: "#e5dfdf",
+      fontFamily: "Raleway-Regular",
+      containerStyle: {
+        backgroundColor: "transparent",
       }
     }
   },

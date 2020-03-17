@@ -11,7 +11,7 @@ import { withTheme } from '../../core/themeProvider';
 
 const Drawer = createDrawerNavigator();
 
-const AppStack = props => {
+const AppStack = ({theme}) => {
   return (
     <Drawer.Navigator 
       initialRouteName="HomeScreen"
