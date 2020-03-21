@@ -1,25 +1,58 @@
-import * as React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import React, {useState} from 'react';
+import { TouchableOpacity, View, Text, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox,ListItem } from 'react-native-elements';
 
 import { withTheme } from '@theme/themeProvider';
+import database from '../../../../database.js';
 
+const StatusSelection = ({ navigation, theme, route }) => {
 
-const StatusSelection = ({ navigation, theme }) => {
+  var sportsInitialState = database.tables.sports.map(obj=> ({ ...obj, checked: false }))
+  const [sports, setSport] = useState(sportsInitialState);
+
+  const handleCheckBox = (sport) => {
+    var newSportsState = sports.map((obj) => {
+      if(obj.sid == sport.sid){
+        obj.checked = !obj.checked;
+      }
+      return obj;
+    });
+    setSport(newSportsState);
+  }
+
+  const handleSports = () => {
+    var selectedSports = sports.filter(obj => {
+      return obj.checked == true;
+    })
+    route.params.sports = selectedSports;
+    navigation.navigate('SuccessScreen',route.params);
+  }
 
   return (
     <View {...theme.Container}>
       <View>
         <Text {...theme.TextHeader}>¿Qué deporte practica?</Text>
         <Text {...theme.Text}>En las rutinas de elongación se tienen en cuenta las cadenas musculares que son mayormente afectadas en cada deporte, favoreciendo el rendimiento del atleta</Text>
-        <CheckBox {...theme.CheckBox} checked={true} title="Fútbol" />
-        <CheckBox {...theme.CheckBox} checked={true} title="Hockey" />
-        <CheckBox {...theme.CheckBox} checked={true} title="Básquet" />
       </View>
+      <ScrollView style={{textAlign: 'left', width: '100%'}}>
+        {
+          sports.map((sport,key) => {
+            return (
+              <CheckBox 
+                key={key}
+                {...theme.CheckBox} 
+                checked={JSON.parse(sport.checked)} 
+                title={sport.name}
+                onPress={() => handleCheckBox(sport)} 
+              />
+            )
+          })
+        }
+      </ScrollView>
       <TouchableOpacity
         {...theme.TouchableOpacity}
-        onPress={() => navigation.navigate('SuccessScreen',{sports: []})}
+        onPress={() => handleSports()}
       >
         <MaterialIcons {...theme.TouchableOpacityIcon} name="navigate-next" />
         <Text {...theme.TouchableOpacityText}>Siguiente</Text>

@@ -17,7 +17,6 @@ const AuthStack = ({theme}) => {
       drawerStyle={{}}
       screenOptions={{
         title: "Completa tu Perfil",
-        headerLeft: null,
         headerStyle: theme.Header.style,
         headerTintColor: theme.Header.tintColor,
         headerTitleStyle: theme.Header.titleStyle,

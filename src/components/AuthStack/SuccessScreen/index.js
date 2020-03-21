@@ -1,33 +1,51 @@
 import * as React from 'react';
-import { Button, View, Text} from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { AsyncStorage } from 'react-native';
 
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman'
-  },
-];
+const StatusSelection = ({ navigation, theme, route }) => {
 
-const StatusSelection = ({ navigation, theme }) => {
-
+  const handleStart = async () => {
+    try {
+      await AsyncStorage.setItem('@profile', JSON.stringify(route.params));
+      navigation.navigate('AppStack');
+    } catch (error) {
+      alert("No se pudieron guardar las configuraciones del perfil");
+    }
+  }
 
   return (
     <View {...theme.Container}>
-  		<Text {...theme.Text}>¡Perfil completado!</Text>
-  		<FontAwesome name="check" size={20} />
-    	<Button
-      	{...theme.Button}
-        onPress={() => navigation.navigate('AppStack')}
-        title="Ir a la pantalla inicial"
-      />
+      <View>
+        <Text {...theme.TextHeader}>¡Perfil completado!</Text>
+        <Text {...theme.Text}>{route.params.gender == 'male' ? "Hombre" : "Mujer"}</Text>
+        <View>
+          {
+            route.params.status ? (
+              <View>
+                <Text {...theme.Text}>Deportes:</Text>
+                  {
+                    route.params.sports.map((sport,key) => {
+                      return <Text key={key} {...theme.Text}>- {sport.name}</Text>
+                    })
+                  }
+              </View>
+            ) : null
+          }
+        </View>
+      </View>
+      <View>
+        <Ionicons size={50} name="md-checkmark" />
+      </View>
+      <View style={{flexDirection: "row"}}>
+        <TouchableOpacity
+          {...theme.TouchableOpacity}
+          onPress={() => handleStart()}
+        >
+          <Text {...theme.TouchableOpacityText}>Comenzar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

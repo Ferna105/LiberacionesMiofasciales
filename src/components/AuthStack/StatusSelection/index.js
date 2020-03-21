@@ -3,7 +3,12 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Ionicons } from '@expo/vector-icons';
 
-const StatusSelection = ({ navigation, theme }) => {
+const StatusSelection = ({ navigation, theme, route }) => {
+
+	const handlePress = status => {
+		route.params.status = status;
+		status ? navigation.navigate('SportsSelection',route.params) : navigation.navigate('SuccessScreen',route.params)
+	}
 
   return (
   	<View {...theme.Container}>
@@ -14,14 +19,14 @@ const StatusSelection = ({ navigation, theme }) => {
     	<View style={{flexDirection: "row"}}>
 	      <TouchableOpacity
 	      	{...theme.TouchableOpacity}
-	      	onPress={() => navigation.navigate('SportsSelection',{status: 'yes'})}
+	      	onPress={() => handlePress(true)}
 	      >
 	      	<Ionicons {...theme.TouchableOpacityIcon} name="md-checkmark" />
 	      	<Text {...theme.TouchableOpacityText}>SI</Text>
 	      </TouchableOpacity>
 	      <TouchableOpacity
 	      	{...theme.TouchableOpacity}
-	      	onPress={() => navigation.navigate('SportsSelection',{status: 'no'})}
+	      	onPress={() => handlePress(false)}
 	      >
 	      	<Ionicons {...theme.TouchableOpacityIcon} name="ios-close" />
 	      	<Text {...theme.TouchableOpacityText}>NO</Text>

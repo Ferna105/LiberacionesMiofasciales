@@ -60,7 +60,7 @@
     },
     CheckBox: {
       checkedColor: "#1b262c",
-      uncheckedColor: "#e5dfdf",
+      uncheckedColor: "#0f4c81",
       fontFamily: "Raleway-Regular",
       containerStyle: {
         backgroundColor: "transparent",
