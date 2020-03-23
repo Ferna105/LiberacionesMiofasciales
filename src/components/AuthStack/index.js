@@ -6,7 +6,7 @@ import SportsSelection from './SportsSelection';
 import StatusSelection from './StatusSelection';
 import SuccessScreen from './SuccessScreen';
 
-import { withTheme } from '../../core/themeProvider';
+import { withTheme } from '@theme/themeProvider';
 
 const Stack = createStackNavigator();
 

@@ -7,11 +7,17 @@ import SportElongationScreen from './SportElongationScreen';
 import ConfigurationScreen from './ConfigurationScreen';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { withTheme } from '../../core/themeProvider';
+import { withTheme } from '@theme/themeProvider';
+import { AuthContext } from '@components/context';
 
 const Drawer = createDrawerNavigator();
 
+
 const AppStack = ({theme}) => {
+  
+  const { getProfile } = React.useContext(AuthContext);
+  const profile = getProfile();
+
   return (
     <Drawer.Navigator 
       initialRouteName="HomeScreen"

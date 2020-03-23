@@ -2,14 +2,15 @@ import * as React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { AsyncStorage } from 'react-native';
+import { AuthContext } from '@components/context';
 
-const StatusSelection = ({ navigation, theme, route }) => {
+const SuccessScreen = ({ navigation, theme, route }) => {
+
+  const { signIn } = React.useContext(AuthContext);
 
   const handleStart = async () => {
     try {
-      await AsyncStorage.setItem('@profile', JSON.stringify(route.params));
-      navigation.navigate('AppStack');
+      signIn(route.params);
     } catch (error) {
       alert("No se pudieron guardar las configuraciones del perfil");
     }
@@ -50,4 +51,4 @@ const StatusSelection = ({ navigation, theme, route }) => {
   );
 }
 
-export default withTheme(StatusSelection);
+export default withTheme(SuccessScreen);
