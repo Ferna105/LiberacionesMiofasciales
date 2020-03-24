@@ -21,36 +21,41 @@ const AppStack = ({theme}) => {
   return (
     <Drawer.Navigator 
       initialRouteName="HomeScreen"
-      drawerStyle={{
-        fontFamily: 'Raleway-Regular'
+      drawerStyle={theme.Drawer.style}
+      screenOptions={{
+        headerStyle: theme.Header.style,
+        headerTintColor: theme.Header.tintColor,
+        headerTitleStyle: theme.Header.titleStyle,
       }}
+      headerMode="screen"
+      drawerContentOptions={theme.Drawer.contentOptions}
     >
       <Drawer.Screen 
         name="HomeScreen" 
         component={HomeScreen} 
         options={{
-          title: 'Home',
+          title: 'Liberaciones Miofasciales',
         }}/>
       <Drawer.Screen 
         name="GeneralElongationScreen" 
         component={GeneralElongationScreen} 
         options={{
           title: 'Elongación General',
-          drawerIcon: config => <MaterialCommunityIcons name="run" size={17} />
+          drawerIcon: config => <MaterialCommunityIcons {...theme.TouchableOpacityIcon} name="run" size={17} />
         }}/>
       <Drawer.Screen 
         name="SportElongationScreen" 
         component={SportElongationScreen} 
         options={{
           title: 'Elongación por Deporte',
-          drawerIcon: config => <FontAwesome name="dribbble" size={20} />
+          drawerIcon: config => <FontAwesome {...theme.TouchableOpacityIcon} name="dribbble" size={20} />
         }}/>
       <Drawer.Screen 
         name="ConfigurationScreen" 
         component={ConfigurationScreen} 
         options={{
           title: 'Configuración',
-          drawerIcon: config => <FontAwesome name="cog" size={20} />
+          drawerIcon: config => <FontAwesome {...theme.TouchableOpacityIcon} name="cog" size={20} />
         }}/>
     </Drawer.Navigator>
   );

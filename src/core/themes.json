@@ -10,6 +10,22 @@
         padding: 20
       }
     },
+    Drawer: {
+      style: {
+        backgroundColor: "#0f4c81"
+      },
+      contentOptions: {
+        activeTintColor: "#e5dfdf",
+        inactiveTintColor: "#e5dfdf",
+        labelStyle: {
+          fontFamily: 'Raleway-Regular',
+        }
+      }
+    },
+    ActivityIndicator: {
+      color: "#0f4c81",
+      size: 50
+    },
     Header: {
       style: {
         backgroundColor: "#0f4c81",
@@ -59,11 +75,14 @@
       }
     },
     CheckBox: {
-      checkedColor: "#1b262c",
+      checkedColor: "#0f4c81",
       uncheckedColor: "#0f4c81",
       fontFamily: "Raleway-Regular",
       containerStyle: {
         backgroundColor: "transparent",
+        borderColor: 'transparent',
+        margin: 0,
+        paddingHorizontal: 0
       }
     }
   },

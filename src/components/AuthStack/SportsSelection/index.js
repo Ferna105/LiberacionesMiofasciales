@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { TouchableOpacity, View, Text, ScrollView } from 'react-native';
+import { TouchableOpacity, View, Text, ScrollView, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { CheckBox,ListItem } from 'react-native-elements';
 
@@ -25,8 +25,21 @@ const StatusSelection = ({ navigation, theme, route }) => {
     var selectedSports = sports.filter(obj => {
       return obj.checked == true;
     })
-    route.params.sports = selectedSports;
-    navigation.navigate('SuccessScreen',route.params);
+
+    if(selectedSports.length == 0){
+      Alert.alert(
+        'Error',
+        'Seleccione un deporte antes de continuar',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }
+    else{
+      route.params.sports = selectedSports;
+      navigation.navigate('SuccessScreen',route.params);
+    }
   }
 
   return (

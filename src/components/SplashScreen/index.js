@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import {
 	View,
-	Text
+	Text,
+	ActivityIndicator
 } from 'react-native';
 
 import { withTheme } from '@theme/themeProvider';
@@ -10,7 +11,7 @@ import { withTheme } from '@theme/themeProvider';
 const SplashScreen = ({theme}) => {
 	return (
 		<View {...theme.Container}>
-			<Text >Loading...</Text>
+			<ActivityIndicator {...theme.ActivityIndicator}/>
 		</View>
 	)
 }
