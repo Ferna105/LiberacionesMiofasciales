@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,TransitionPresets } from '@react-navigation/stack';
 import { withTheme } from '@theme/themeProvider';
 
 import LevelSelection from './LevelSelection';
@@ -14,6 +14,14 @@ const GeneralElongation = ({theme}) => {
   return (
     <Stack.Navigator 
       initialRouteName="LevelSelection"
+      drawerStyle={{}}
+      screenOptions={{
+        title: "Completa tu Perfil",
+        headerStyle: theme.Header.style,
+        headerTintColor: theme.Header.tintColor,
+        headerTitleStyle: theme.Header.titleStyle,
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
       headerMode="screen"
     >
       <Stack.Screen 
