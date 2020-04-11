@@ -1,4 +1,4 @@
-import database from '@root/database.js';
+import database from '@theme/database.js';
 
 export const getRoutinesByType = (type) => {
 

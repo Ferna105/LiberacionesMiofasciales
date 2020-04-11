@@ -26,9 +26,9 @@ const RoutineInformation = ({theme,navigation,route}) => {
 		return (exercise.data.name + " " + exercise.replays);
 	}
 
-	const renderExercisesList = (exercise) => {
+	const renderExercisesList = (exercise,key) => {
 		return (
-			<View {...theme.FlatListItem}>
+			<View {...theme.FlatListItem} key={key}>
 				<View style={{flex: 2}}>
 					<Text {...theme.Text}>{exercise.data.name}</Text> 
 				</View>
@@ -48,17 +48,18 @@ const RoutineInformation = ({theme,navigation,route}) => {
 		  			A continuación se muestran todos los ejercicios de la rutiina. Si desconoce como es cada uno puede ver el video de explicación.
 		  		</Text>
 	  		</View>
-	  		<ScrollView style={{textAlign: 'left', width: '100%'}}>
+
 	  		{
 	  			routine.exercises.length ? (
 		  			<FlatList
-		  				style={{marginVertical: 10}}
+		  				style={{marginVertical: 10, width: "100%"}}
 			          	data={routine.exercises}
-			          	renderItem={({item}) => renderExercisesList(item)}
+			          	renderItem={({item,index}) => renderExercisesList(item,index)}
+			          	keyExtractor={(item,index) => index.toString()}
 			        />
 	  			) : null
 	  		}
-	  		</ScrollView>
+
 	  		<View>
 	  			<TouchableOpacity {...theme.TouchableOpacity} onPress={() => navigation.navigate('StartRoutine',{routine: routine})}>
 					<Text {...theme.TouchableOpacityText}>Comenzar</Text>

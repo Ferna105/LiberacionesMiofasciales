@@ -5,6 +5,7 @@ import { withTheme } from '@theme/themeProvider';
 import LevelSelection from './LevelSelection';
 import RoutineInformation from './RoutineInformation';
 import StartRoutine from '@components/AppStack/StartRoutine';
+import Congratulations from '@components/AppStack/Congratulations';
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,12 @@ const GeneralElongation = ({theme}) => {
         component={StartRoutine} 
         options={{
           title: 'Elongación general',
+        }}/>
+      <Stack.Screen 
+        name="Congratulations" 
+        component={Congratulations} 
+        options={{
+          title: 'Felicitaciones',
         }}/>
     </Stack.Navigator>
   );

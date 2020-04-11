@@ -45,7 +45,7 @@
         borderRadius:5,
         alignItems: "center",
         margin: 10,
-        width: 100
+
       },
       activeOpacity: .5
     },
@@ -72,7 +72,7 @@
         color: "#1b262c",
         fontFamily: 'Raleway-Bold',
         fontSize: 17,
-        textAlign: 'center'
+        textAlign: "center"
       }
     },
     CheckBox: {

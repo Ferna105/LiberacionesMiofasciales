@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { AuthContext } from '@components/context';
 

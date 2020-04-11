@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { CheckBox,ListItem } from 'react-native-elements';
 
 import { withTheme } from '@theme/themeProvider';
-import database from '@root/database.js';
+import database from '@theme/database.js';
 
 const StatusSelection = ({ navigation, theme, route }) => {
 
