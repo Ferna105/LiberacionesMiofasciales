@@ -11,7 +11,8 @@ import {Audio} from 'expo-av';
 
 const StartRoutine = ({theme,navigation,route}) => {
 
-	const sound = new Audio.Sound();
+	const startSound = new Audio.Sound();
+	const restSound = new Audio.Sound();
 
 	const [secondsExercise, setSecondsExercise] = useState(10)
 	const [isExercise, setIsExercise] = useState(false);
@@ -36,61 +37,60 @@ const StartRoutine = ({theme,navigation,route}) => {
 
 		totalInterval = setInterval(() => {
 			setTotalSeconds(totalSeconds => totalSeconds + 1)
+			
+
+
+
+			if (isActive) {
+		    
+		    	setSeconds(seconds => seconds + 1);
+
+			    if (isExercise) {
+			    	setSecondsExercise(secondsExercise => secondsExercise - 1);
+
+				    if(secondsExercise == 0) {
+			    		changePoint();
+			    	}
+			    }
+
+			    if (isRest) {
+
+			    	setSecondsRest(secondsRest => secondsRest - 1);
+				    //if(secondsRest != 0) playRestSound();
+				    			    	
+			    	if(secondsRest == 0) {
+			    		playStartSound();
+			    		changePoint();
+			    	}
+			    }
+
+
+		    } 
+
+
+
+
+
+
 		}, 1000);
 
-		if (isActive) {
-		    
-		    interval = setInterval(() => {
-		    	setSeconds(seconds => seconds + 1);
-		    }, 1000);
-
-		    if (isExercise) {
-		    	exerciseIterval = setInterval(() => {
-			    	setSecondsExercise(secondsExercise => secondsExercise - 1);
-			    }, 1000);
-
-			    if(secondsExercise == 0) {
-		    		changePoint();
-		    	}
-		    }
-
-		    if (isRest) {
-
-		    	restInterval = setInterval(() => {
-			    	setSecondsRest(secondsRest => secondsRest - 1);
-			    	if(secondsRest != 0) playRestSound();
-			    }, 1000);
-		    	
-		    	if(secondsRest == 0) {
-		    		//playStartSound();
-		    		changePoint();
-		    	}
-		    }
-
-
-	    } else if (!isActive && seconds !== 0) {
-	      
-	      	clearInterval(interval);
-	      	clearInterval(exerciseIterval);
-	      	clearInterval(restInterval);
-	    }
+		
 	    
 	    return () => {
-	    	clearInterval(interval);
 	    	clearInterval(totalInterval);
-	    	clearInterval(exerciseIterval);
-	    	clearInterval(restInterval);
 	    };
 
-	},[isActive,seconds,secondsExercise,secondsRest]);
+	});
 
 
 	const playRestSound = () => {
 		
 		const play = (async () => {
 			try{
-				await sound.loadAsync(require('@assets/sounds/hit.mp3'));
-				await sound.playAsync();
+				console.log("ANTES");
+				await restSound.loadAsync(require('@assets/sounds/hit.mp3'));
+				await restSound.playAsync();
+				console.log("DESP");
 			} catch (error) {
 				console.log(error)
 			}
@@ -101,8 +101,10 @@ const StartRoutine = ({theme,navigation,route}) => {
 		
 		const play = (async () => {
 			try{
-				await sound.loadAsync(require('@assets/sounds/classic_hurt.mp3'));
-				await sound.playAsync();
+				console.log("ANTES");
+				await startSound.loadAsync(require('@assets/sounds/classic_hurt.mp3'));
+				await startSound.playAsync();
+				console.log("DESP");
 			} catch (error) {
 				console.log(error)
 			}

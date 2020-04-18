@@ -18,3 +18,10 @@ export const getRoutineByRid = (rid) => {
 	});
 	return routine;
 }
+
+export const getChains = () => {
+
+	var {chains} = database.tables;
+	return chains;
+	
+}

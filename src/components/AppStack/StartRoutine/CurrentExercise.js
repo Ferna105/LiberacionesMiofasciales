@@ -1,9 +1,10 @@
 import React from 'react';
 import {
 	Text,
-	Image,
 	View
 } from 'react-native';
+import { Video } from 'expo-av';
+
 import { withTheme } from '@theme/themeProvider';
 
 const CurrentExercise = ({theme, exercise, style}) => {
@@ -13,7 +14,16 @@ const CurrentExercise = ({theme, exercise, style}) => {
 				<Text {...theme.TextHeader}>{exercise.data.name}</Text>
 			</View>
 			<View style={{alignItems: 'center', marginBottom: 10, flex: 8}}>
-				<Image source={{uri: exercise.data.gif }} style={{width: 300, height: 250,resizeMode: 'cover'}}/>
+				<Video
+				  source={exercise.data.gif}
+				  rate={1.0}
+				  volume={1.0}
+				  isMuted={false}
+				  resizeMode="contain"
+				  shouldPlay
+				  isLooping
+				  style={{ width: 300, height: 250 }}
+				/>
 			</View>
 		</View>
 	)

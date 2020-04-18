@@ -5,16 +5,22 @@ import {
 	TouchableOpacity,
 	Image,
 	FlatList,
-	ScrollView
+	ScrollView,
+	Modal
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
 import { getRoutineByRid } from '@theme/queries';
+import { Video } from 'expo-av';
+import AddAccessoryExercises from '@components/AppStack/AddAccessoryExercises';
 
 const RoutineInformation = ({theme,navigation,route}) => {
 
 
 	const [routine,setRoutine] = useState({exercises: []});
+	const [modalVisible, setModalVisible] = useState(false);
+	const [selectedExerciseModal, setSelectedExerciseModal] = useState({});
+	const [chainsModalVisible,setChainsModalVisible] = useState(false);
 
 	useEffect(() => {
 		var {rid} = route.params;
@@ -26,19 +32,25 @@ const RoutineInformation = ({theme,navigation,route}) => {
 		return (exercise.data.name + " " + exercise.replays);
 	}
 
-	const renderExercisesList = (exercise,key) => {
-		return (
-			<View {...theme.FlatListItem} key={key}>
-				<View style={{flex: 2}}>
-					<Text {...theme.Text}>{exercise.data.name}</Text> 
-				</View>
-				<View style={{flex: 1, alignItems: 'flex-end',justifyContent: 'center'}}>
-					<Ionicons size={20} name="ios-search"/>
-				</View>
-			</View>
-		)
+	const openExerciseInModal = (exercise) => {
+		setSelectedExerciseModal(exercise);
+		setModalVisible(true);
 	}
 
+	const renderExercisesList = (exercise,key) => {
+		return (
+			<TouchableOpacity onPress={() => openExerciseInModal(exercise)}>
+				<View {...theme.FlatListItem} key={key}>
+					<View style={{flex: 2}}>
+						<Text {...theme.Text}>{exercise.data.name}</Text> 
+					</View>
+					<View style={{flex: 1, alignItems: 'flex-end',justifyContent: 'center'}}>
+							<Ionicons size={20} name="ios-search"/>
+					</View>
+				</View>
+			</TouchableOpacity>
+		)
+	}
 
 	return (
 		<View {...theme.Container}>
@@ -60,7 +72,68 @@ const RoutineInformation = ({theme,navigation,route}) => {
 	  			) : null
 	  		}
 
+
+	  		<Modal
+		        animationType="slide"
+		        transparent={false}
+		        visible={modalVisible}
+		        onRequestClose={() => {
+		          Alert.alert('Modal has been closed.');
+		        }}>
+		        <View style={{ marginTop: 22 }}>
+		            <View style={{alignItems: 'center', marginBottom: 10}}>
+		            	{
+		            		selectedExerciseModal.data && (
+		            			<>
+		            				<View style={{marginBottom: 10}}>
+		            					<Text {...theme.TextHeader}>{selectedExerciseModal.data.name}</Text>
+		            				</View>
+									<Video
+									  source={selectedExerciseModal.data.gif}
+									  rate={1.0}
+									  volume={1.0}
+									  isMuted={false}
+									  resizeMode="contain"
+									  shouldPlay
+									  isLooping
+									  style={{ width: 300, height: 250 }}
+									/>
+								</>
+		            		)
+		            	}
+					</View>
+
+		            <TouchableOpacity
+		            	{...theme.TouchableOpacity}
+						onPress={() => {
+							setModalVisible(!modalVisible);
+						}}>
+		              	<Text {...theme.TouchableOpacityText}>Cerrar</Text>
+		            </TouchableOpacity>
+		        </View>
+      		</Modal>
+
+      		<Modal 
+      			animationType="slide"
+		        transparent={false}
+		        visible={chainsModalVisible}
+		        onRequestClose={() => {
+		          Alert.alert('Modal has been closed.');
+		        }}>
+      			<AddAccessoryExercises routine={routine}/>
+      			<TouchableOpacity
+	            	{...theme.TouchableOpacity}
+					onPress={() => {
+						setChainsModalVisible(!chainsModalVisible);
+					}}>
+	              	<Text {...theme.TouchableOpacityText}>Cerrar</Text>
+	            </TouchableOpacity>
+      		</Modal>
+
 	  		<View>
+	  			<TouchableOpacity {...theme.TouchableOpacity} onPress={() => setChainsModalVisible(true)}>
+					<Text {...theme.TouchableOpacityText}>Ejercicios accesorios</Text>
+				</TouchableOpacity>
 	  			<TouchableOpacity {...theme.TouchableOpacity} onPress={() => navigation.navigate('StartRoutine',{routine: routine})}>
 					<Text {...theme.TouchableOpacityText}>Comenzar</Text>
 				</TouchableOpacity>
