@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator,TransitionPresets} from '@react-navigation/stack';
 
-import GenderSelection from './GenderSelection';
 import SportsSelection from './SportsSelection';
 import StatusSelection from './StatusSelection';
 import SuccessScreen from './SuccessScreen';
@@ -14,7 +13,6 @@ const AuthStack = ({theme}) => {
 
   return (
     <Stack.Navigator 
-      drawerStyle={{}}
       screenOptions={{
         title: "Completa tu Perfil",
         headerStyle: theme.Header.style,
@@ -25,16 +23,12 @@ const AuthStack = ({theme}) => {
       headerMode="screen"
     >
       <Stack.Screen 
-        name="GenderSelection" 
-        component={GenderSelection}
+        name="StatusSelection" 
+        component={StatusSelection}
       />
       <Stack.Screen 
         name="SportsSelection" 
         component={SportsSelection}
-      />
-      <Stack.Screen 
-        name="StatusSelection" 
-        component={StatusSelection}
       />
       <Stack.Screen 
         name="SuccessScreen" 

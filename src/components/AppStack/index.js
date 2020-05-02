@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './HomeScreen';
-import GeneralElongationScreen from './GeneralElongationScreen';
-import SportElongationScreen from './SportElongationScreen';
-import ConfigurationScreen from './ConfigurationScreen';
+import CreateRoutine from './CreateRoutine';
+import Explore from './Explore';
+import Configuration from './Configuration';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { withTheme } from '@theme/themeProvider';
 import { AuthContext } from '@components/context';
 
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 
 const AppStack = ({theme}) => {
@@ -19,45 +19,45 @@ const AppStack = ({theme}) => {
   const profile = getProfile();
 
   return (
-    <Drawer.Navigator 
+    <Stack.Navigator 
       initialRouteName="HomeScreen"
-      drawerStyle={theme.Drawer.style}
+      drawerStyle={theme.Stack.style}
       screenOptions={{
         headerStyle: theme.Header.style,
         headerTintColor: theme.Header.tintColor,
         headerTitleStyle: theme.Header.titleStyle,
       }}
-      headerMode="screen"
-      drawerContentOptions={theme.Drawer.contentOptions}
+      headerMode="null"
+      drawerContentOptions={theme.Stack.contentOptions}
     >
-      <Drawer.Screen 
+      <Stack.Screen 
         name="HomeScreen" 
         component={HomeScreen} 
         options={{
           title: 'Liberaciones Miofasciales',
         }}/>
-      <Drawer.Screen 
-        name="GeneralElongationScreen" 
-        component={GeneralElongationScreen} 
+      <Stack.Screen 
+        name="CreateRoutine" 
+        component={CreateRoutine} 
         options={{
-          title: 'Elongación General',
+          title: 'Crear rutina',
           drawerIcon: config => <MaterialCommunityIcons {...theme.TouchableOpacityIcon} name="run" size={17} />
         }}/>
-      <Drawer.Screen 
-        name="SportElongationScreen" 
-        component={SportElongationScreen} 
+      <Stack.Screen 
+        name="Explore" 
+        component={Explore} 
         options={{
-          title: 'Elongación por Deporte',
+          title: 'Explorar',
           drawerIcon: config => <FontAwesome {...theme.TouchableOpacityIcon} name="dribbble" size={20} />
         }}/>
-      <Drawer.Screen 
-        name="ConfigurationScreen" 
-        component={ConfigurationScreen} 
+      <Stack.Screen 
+        name="Configuration" 
+        component={Configuration} 
         options={{
           title: 'Configuración',
           drawerIcon: config => <FontAwesome {...theme.TouchableOpacityIcon} name="cog" size={20} />
         }}/>
-    </Drawer.Navigator>
+    </Stack.Navigator>
   );
 }
 

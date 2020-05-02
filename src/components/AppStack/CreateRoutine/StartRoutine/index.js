@@ -87,10 +87,10 @@ const StartRoutine = ({theme,navigation,route}) => {
 		
 		const play = (async () => {
 			try{
-				console.log("ANTES");
+
 				await restSound.loadAsync(require('@assets/sounds/hit.mp3'));
 				await restSound.playAsync();
-				console.log("DESP");
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -101,10 +101,10 @@ const StartRoutine = ({theme,navigation,route}) => {
 		
 		const play = (async () => {
 			try{
-				console.log("ANTES");
+
 				await startSound.loadAsync(require('@assets/sounds/classic_hurt.mp3'));
 				await startSound.playAsync();
-				console.log("DESP");
+
 			} catch (error) {
 				console.log(error)
 			}
@@ -124,7 +124,7 @@ const StartRoutine = ({theme,navigation,route}) => {
 	}
 
 	const changeExercise = () => {
-		if(currentExercise + 1 < route.params.routine.exercises.length){
+		if(currentExercise + 1 < route.params.routine.length){
 			setCurrentExcercise(currentExercise + 1);
 		}
 		else{

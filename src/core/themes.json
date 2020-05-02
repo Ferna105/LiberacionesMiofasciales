@@ -10,7 +10,7 @@
         padding: 20
       }
     },
-    Drawer: {
+    Stack: {
       style: {
         backgroundColor: "#0f4c81"
       },

@@ -29,8 +29,9 @@ export default function App() {
         AsyncStorage.setItem('@profile', '');
       },
       getProfile: () => {
-
-        return profile;
+        AsyncStorage.getItem('@profile').then(profile => {
+          return JSON.parse(profile);
+        });
       }
     }
   }, [])
@@ -46,7 +47,6 @@ export default function App() {
         });
 
         storedProfile = await AsyncStorage.getItem('@profile');
-        console.log(storedProfile);
         setProfile(JSON.parse(storedProfile));
 
       } catch (e) {

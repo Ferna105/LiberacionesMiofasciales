@@ -3,11 +3,10 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Ionicons } from '@expo/vector-icons';
 
-const StatusSelection = ({ navigation, theme, route }) => {
+const StatusSelection = ({ navigation, theme }) => {
 
 	const handlePress = status => {
-		route.params.status = status;
-		status ? navigation.navigate('SportsSelection',route.params) : navigation.navigate('SuccessScreen',route.params)
+		status ? navigation.navigate('SportsSelection',{status}) : navigation.navigate('SuccessScreen',{status})
 	}
 
   return (

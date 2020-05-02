@@ -20,7 +20,6 @@ const SuccessScreen = ({ navigation, theme, route }) => {
     <View {...theme.Container}>
       <View>
         <Text {...theme.TextHeader}>¡Perfil completado!</Text>
-        <Text {...theme.Text}>Sexo: {route.params.gender == 'male' ? "Hombre" : "Mujer"}</Text>
         <View>
           {
             route.params.status ? (

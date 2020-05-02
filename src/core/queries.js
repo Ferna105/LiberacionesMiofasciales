@@ -8,6 +8,14 @@ export const getRoutinesByType = (type) => {
 
 }
 
+export const getRoutineBySid = (sid) => {
+
+	var {routines} = database.tables;
+	var result = routines.filter(routine => routine.sid === sid);
+	return result;
+
+}
+
 export const getRoutineByRid = (rid) => {
 
 	var {routines,exercises_routines,exercises} = database.tables;
@@ -19,9 +27,56 @@ export const getRoutineByRid = (rid) => {
 	return routine;
 }
 
+export const getExerciseByCid = (cid) => {
+	var {exercises} = database.tables;
+	chain_exercises = exercises.filter(er => er.cid == cid);
+	return chain_exercises;	
+}
+
 export const getChains = () => {
 
 	var {chains} = database.tables;
 	return chains;
 	
+}
+
+
+export const getUserRoutines = (profile) => {
+	var {routines} = database.tables;
+	var routines = getRoutinesByType('general');
+
+	if( profile.status ){
+		var sportsRoutines = Array();
+		profile.sports.map((sport,key) => {
+			routines = routines.concat(getRoutineBySid(sport.sid));
+		});
+	}
+	return routines;	
+}
+
+export const getGeneratedRoutine = (userSelection) => {
+	var exercisesList = Array();
+	userSelection.routines.map((sr,key) => {
+		if(sr.selected) {
+			var r = getRoutineByRid(sr.rid);
+			for (var i = 0; i < sr.level; i++) {
+				r.exercises.map((ex,keyex) => {
+					exercisesList = exercisesList.concat(ex.data);
+				});
+			}
+		}
+
+	})
+
+	if(userSelection.chains){
+		userSelection.chains.map((ch,key) => {
+			if(ch.selected){
+				var c = getExerciseByCid(ch.cid);
+				exercisesList = exercisesList.concat(c);
+			}
+		})
+	}
+
+	return exercisesList;
+	console.log(exercisesList,"RUTINA");
 }

@@ -2,19 +2,21 @@ import * as React from 'react';
 import { createStackNavigator,TransitionPresets } from '@react-navigation/stack';
 import { withTheme } from '@theme/themeProvider';
 
-import LevelSelection from './LevelSelection';
+import SelectRoutines from './SelectRoutines';
+import AddAccessory from './AddAccessory';
+import AccessoryExercises from './AccessoryExercises';
 import RoutineInformation from './RoutineInformation';
-import StartRoutine from '@components/AppStack/StartRoutine';
-import Congratulations from '@components/AppStack/Congratulations';
+import StartRoutine from './StartRoutine';
+import Congratulations from './Congratulations';
 
 const Stack = createStackNavigator();
 
 
-const GeneralElongation = ({theme}) => {
+const CreateRoutine = ({theme}) => {
   
   return (
     <Stack.Navigator 
-      initialRouteName="LevelSelection"
+      initialRouteName="SelectRoutines"
       drawerStyle={{}}
       screenOptions={{
         title: "Completa tu Perfil",
@@ -26,16 +28,28 @@ const GeneralElongation = ({theme}) => {
       headerMode="screen"
     >
       <Stack.Screen 
-        name="LevelSelection" 
-        component={LevelSelection} 
+        name="SelectRoutines" 
+        component={SelectRoutines} 
         options={{
-          title: 'Elongación general',
+          title: 'Seleccionar rutinas',
+        }}/>
+      <Stack.Screen 
+        name="AddAccessory" 
+        component={AddAccessory} 
+        options={{
+          title: 'Ejercicios accesorios',
+        }}/>
+      <Stack.Screen 
+        name="AccessoryExercises" 
+        component={AccessoryExercises} 
+        options={{
+          title: 'Ejercicios accesorios',
         }}/>
       <Stack.Screen 
         name="RoutineInformation" 
         component={RoutineInformation} 
         options={{
-          title: 'Elongación general',
+          title: 'Rutina armada',
         }}/>
       <Stack.Screen 
         name="StartRoutine" 
@@ -53,4 +67,4 @@ const GeneralElongation = ({theme}) => {
   );
 }
 
-export default withTheme(GeneralElongation);
+export default withTheme(CreateRoutine);
