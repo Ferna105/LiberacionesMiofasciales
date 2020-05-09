@@ -6,6 +6,7 @@ import {
 	TouchableOpacity,
 	Text
 } from 'react-native';
+import BackgroundContainer from '@components/BackgroundContainer';
 
 import { getChains } from '@theme/queries';
 import { withTheme } from '@theme/themeProvider';
@@ -40,24 +41,26 @@ const AccessoryExercises = ({navigation,theme,route}) => {
   	}
 
 	return (
-		<View>
-			<View style={{flexDirection: "row", flexWrap: "wrap"}}>
-				{
-					chains.map((chain,key) => {
-						console.log(chain.selected);
-						let style = chain.selected ? {borderWidth: 4,borderColor: 'green'} : {borderWidth: 0};
-						return (
-							<TouchableOpacity onPress={() => updateSelectedChains(key)} key={key} >
-								<Image key={key} source={chain.image} style={[calculatedSize(),style]}/>
-							</TouchableOpacity>
-						)
-					})
-				}
+		<BackgroundContainer>
+			<View >
+				<View style={{flexDirection: "row", flexWrap: "wrap"}}>
+					{
+						chains.map((chain,key) => {
+							console.log(chain.selected);
+							let style = chain.selected ? {borderWidth: 4,borderColor: 'green'} : {borderWidth: 0};
+							return (
+								<TouchableOpacity onPress={() => updateSelectedChains(key)} key={key} >
+									<Image key={key} source={chain.image} style={[calculatedSize(),style]}/>
+								</TouchableOpacity>
+							)
+						})
+					}
+				</View>
+				<TouchableOpacity {...theme.TouchableOpacity} onPress={() => selectChains()} >
+					<Text {...theme.TouchableOpacityText}>Siguiente</Text>
+				</TouchableOpacity>
 			</View>
-			<TouchableOpacity {...theme.TouchableOpacity} onPress={() => selectChains()} >
-				<Text {...theme.TouchableOpacityText}>Siguiente</Text>
-			</TouchableOpacity>
-		</View>
+		</BackgroundContainer>
 	)
 }
 

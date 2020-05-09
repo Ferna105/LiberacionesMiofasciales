@@ -17,7 +17,7 @@ const CreateRoutine = ({theme}) => {
   return (
     <Stack.Navigator 
       initialRouteName="SelectRoutines"
-      drawerStyle={{}}
+      drawerStyle={theme.Stack.style}
       screenOptions={{
         title: "Completa tu Perfil",
         headerStyle: theme.Header.style,

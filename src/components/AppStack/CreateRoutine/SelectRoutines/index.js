@@ -12,6 +12,7 @@ import { getUserRoutines, getRoutinesByType } from '@theme/queries';
 import { CheckBox } from 'react-native-elements';
 import { AuthContext } from '@components/context';
 import { AsyncStorage } from 'react-native';
+import BackgroundContainer from '@components/BackgroundContainer';
 
 const LevelSelection = ({navigation, theme}) => {
 	
@@ -45,46 +46,48 @@ const LevelSelection = ({navigation, theme}) => {
 	}
 
 	return (
-		<View {...theme.Container}>
-	    	<View>
-		  		<Text {...theme.TextHeader}>Rutinas para usted</Text>
-		  		<Text {...theme.Text}>Seleccione el nivel y las rutinas que desea realizar</Text>
-	  		</View>
-	  		<ScrollView style={{textAlign: 'left', width: '100%'}}>
-	    	{
-	    		routines.map((routine,key) => {
-	    			var disabled = routine.type == 'general' ? true : false;
-    				return (
-	    				<View key={key} style={{flexDirection: 'row'}}>
-	    					<View style={{flex:1}}>
-		    					<CheckBox 
-				            {...theme.CheckBox} 
-				            checked={routine.selected}
-				            disabled={disabled} 
-				            title={routine.name}
-				            onPress={() => updateSelectedRoutines(key)}
-				          />
-				        </View>
-				        <View style={{flex: 1}}>
-				          <Picker
-						        selectedValue={routine.level}
-						        style={{ height: 50}}
-						        onValueChange={(itemValue, itemIndex) => updateLevelRoutines(key,itemValue)}
-						      >
-						        <Picker.Item label="Nivel 1" value="1" />
-						        <Picker.Item label="Nivel 2" value="2" />
-						        <Picker.Item label="Nivel 3" value="3" />
-						      </Picker>
-						    </View>
-	    				</View>
-	    			)
-	    		})
-	    	}
-    	</ScrollView>
-    	<TouchableOpacity onPress={() => navigation.navigate('AddAccessory',{routines})} >
-    		<Text>Siguiente</Text>
-    	</TouchableOpacity>
-    </View>
+		<BackgroundContainer>
+			<View {...theme.Container}>
+		    	<View>
+			  		<Text {...theme.TextHeader}>Rutinas para usted</Text>
+			  		<Text {...theme.Text}>Seleccione el nivel y las rutinas que desea realizar</Text>
+		  		</View>
+		  		<ScrollView style={{textAlign: 'left', width: '100%'}}>
+		    	{
+		    		routines.map((routine,key) => {
+		    			var disabled = routine.type == 'general' ? true : false;
+	    				return (
+		    				<View key={key} style={{flexDirection: 'row'}}>
+		    					<View style={{flex:1}}>
+			    					<CheckBox 
+					            {...theme.CheckBox} 
+					            checked={routine.selected}
+					            disabled={disabled} 
+					            title={routine.name}
+					            onPress={() => updateSelectedRoutines(key)}
+					          />
+					        </View>
+					        <View style={{flex: 1}}>
+					          <Picker
+							        selectedValue={routine.level}
+							        onValueChange={(itemValue, itemIndex) => updateLevelRoutines(key,itemValue)}
+							        {...theme.Picker}
+							      >
+							        <Picker.Item label="Nivel 1" value="1" />
+							        <Picker.Item label="Nivel 2" value="2" />
+							        <Picker.Item label="Nivel 3" value="3" />
+							      </Picker>
+							    </View>
+		    				</View>
+		    			)
+		    		})
+		    	}
+	    		</ScrollView>
+		    	<TouchableOpacity {...theme.TouchableOpacity} onPress={() => navigation.navigate('AddAccessory',{routines})} >
+		    		<Text {...theme.TouchableOpacityText}>Siguiente</Text>
+		    	</TouchableOpacity>
+		    </View>
+	   	</BackgroundContainer>
 	)
 }
 

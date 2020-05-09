@@ -8,9 +8,10 @@ import {
 import { withTheme } from '@theme/themeProvider';
 import CurrentExercise from './CurrentExercise';
 import {Audio} from 'expo-av';
+import BackgroundContainer from '@components/BackgroundContainer';
 
 const StartRoutine = ({theme,navigation,route}) => {
-
+	console.log(route.params.routine[0]);
 	const startSound = new Audio.Sound();
 	const restSound = new Audio.Sound();
 
@@ -26,7 +27,6 @@ const StartRoutine = ({theme,navigation,route}) => {
 	const [totalSeconds,setTotalSeconds] = useState(0);
 
 	const [currentExercise, setCurrentExcercise] = useState(0);
-	const [repetition, setRepetition] = useState(1);
 
 	useEffect(() => {
 
@@ -128,61 +128,56 @@ const StartRoutine = ({theme,navigation,route}) => {
 			setCurrentExcercise(currentExercise + 1);
 		}
 		else{
-			if(repetition < route.params.routine.repetitions){
-				setRepetition(repetition + 1);
-				setCurrentExcercise(0);
-			}
-			else{
-				navigation.navigate('Congratulations');
-			}
+			navigation.navigate('Congratulations');
 		}
 
 	}
 
 	const calculateProgress = () => {
-		const {exercises,repetitions} = route.params.routine;
-		return ( ( ( repetition - 1 ) * exercises.length + ( currentExercise ) ) / ( exercises.length * repetitions ) )
+		return ( currentExercise / route.params.routine.length )
 	}
 
 	return (
-		<View {...theme.Container}>
-	    	<CurrentExercise style={{flex:6}} exercise={route.params.routine.exercises[currentExercise]}  />
-			
-			<View style={{flex:2}}>
-				<Text>
-					<Text {...theme.Text} >Tiempo total transcurrido</Text>
-					<Text {...theme.TextHeader} > {totalSeconds.toHHMMSS()}</Text>
-				</Text>
-				<Text>
-					<Text {...theme.Text} >Tiempo sin pausa</Text>
-					<Text {...theme.TextHeader} > {seconds.toHHMMSS()}</Text>
-				</Text>
-				<Text>
-					<Text {...theme.Text} >Ejercicio</Text>
-					<Text {...theme.TextHeader} > {secondsExercise.toHHMMSS()}</Text>
-				</Text>
-				<Text>
-					<Text {...theme.Text} >Descanso</Text>
-					<Text {...theme.TextHeader} > {secondsRest.toHHMMSS()}</Text>
-				</Text>
-			</View>
-			<View style={{flex: 2}}>
-				<ProgressBarAndroid
-					{...theme.ProgressBarAndroid}
-		          styleAttr="Horizontal"
-		          indeterminate={false}
-		          progress={ calculateProgress() }
-				/>
-				<View style={{flexDirection: "row", justifyContent: 'center'}}>
-					<TouchableOpacity {...theme.TouchableOpacity} onPress={() => pauseRoutine()} >
-						<Text {...theme.TouchableOpacityText} >{isActive ? "Pausar" : "Comenzar"}</Text>
-					</TouchableOpacity>
-					<TouchableOpacity {...theme.TouchableOpacity} onPress={() => changePoint()} >
-						<Text {...theme.TouchableOpacityText} >Forzar</Text>
-					</TouchableOpacity>
+		<BackgroundContainer>
+			<View {...theme.Container}>
+		    	<CurrentExercise style={{flex:6}} exercise={route.params.routine[currentExercise]}  />
+				
+				<View style={{flex:2}}>
+					<Text>
+						<Text {...theme.Text} >Tiempo total transcurrido</Text>
+						<Text {...theme.TextHeader} > {totalSeconds.toHHMMSS()}</Text>
+					</Text>
+					<Text>
+						<Text {...theme.Text} >Tiempo sin pausa</Text>
+						<Text {...theme.TextHeader} > {seconds.toHHMMSS()}</Text>
+					</Text>
+					<Text>
+						<Text {...theme.Text} >Ejercicio</Text>
+						<Text {...theme.TextHeader} > {secondsExercise.toHHMMSS()}</Text>
+					</Text>
+					<Text>
+						<Text {...theme.Text} >Descanso</Text>
+						<Text {...theme.TextHeader} > {secondsRest.toHHMMSS()}</Text>
+					</Text>
 				</View>
-			</View>
-	    </View>
+				<View style={{flex: 2}}>
+					<ProgressBarAndroid
+						{...theme.ProgressBarAndroid}
+			          styleAttr="Horizontal"
+			          indeterminate={false}
+			          progress={ calculateProgress() }
+					/>
+					<View style={{flexDirection: "row", justifyContent: 'center'}}>
+						<TouchableOpacity {...theme.TouchableOpacity} onPress={() => pauseRoutine()} >
+							<Text {...theme.TouchableOpacityText} >{isActive ? "Pausar" : "Comenzar"}</Text>
+						</TouchableOpacity>
+						<TouchableOpacity {...theme.TouchableOpacity} onPress={() => changePoint()} >
+							<Text {...theme.TouchableOpacityText} >Forzar</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
+		    </View>
+		</BackgroundContainer>
 	)
 }
 

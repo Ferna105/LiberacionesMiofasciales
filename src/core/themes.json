@@ -3,7 +3,6 @@
     key: "LIBERACION_MIOFACIAL_STANDARD",
     Container: {
       style: {
-        backgroundColor: "#e5dfdf",
         flex: 1, 
         alignItems: 'center', 
         justifyContent: 'center',
@@ -55,6 +54,12 @@
         fontFamily: "Raleway-Bold"
       }
     },
+    Picker:{
+      style:{
+        height: 50,
+        color: '#e5dfdf'
+      }
+    },
     TouchableOpacityIcon: {
       size: 40,
       style: {
@@ -63,13 +68,13 @@
     },
     Text: {
       style: {
-        color: "#1b262c",
+        color: "#e5dfdf",
         fontFamily: 'Raleway-Regular',
       }
     },
     TextHeader: {
       style: {
-        color: "#1b262c",
+        color: "#e5dfdf",
         fontFamily: 'Raleway-Bold',
         fontSize: 17,
         textAlign: "center"

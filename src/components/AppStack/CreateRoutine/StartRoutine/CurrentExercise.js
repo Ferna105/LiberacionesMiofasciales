@@ -11,11 +11,11 @@ const CurrentExercise = ({theme, exercise, style}) => {
 	return (
 		<View style={style}>
 			<View style={{alignItems: 'center', marginBottom: 10, flex: 1}}>
-				<Text {...theme.TextHeader}>{exercise.data.name}</Text>
+				<Text {...theme.TextHeader}>{exercise.name}</Text>
 			</View>
 			<View style={{alignItems: 'center', marginBottom: 10, flex: 8}}>
 				<Video
-				  source={exercise.data.gif}
+				  source={exercise.gif}
 				  rate={1.0}
 				  volume={1.0}
 				  isMuted={false}

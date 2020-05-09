@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
 import { getGeneratedRoutine } from '@theme/queries';
 import { Video } from 'expo-av';
+import BackgroundContainer from '@components/BackgroundContainer';
 
 const RoutineInformation = ({theme,navigation,route}) => {
 
@@ -50,72 +51,74 @@ const RoutineInformation = ({theme,navigation,route}) => {
 	}
 
 	return (
-		<View {...theme.Container}>
-	    	<View>
-		  		<Text {...theme.TextHeader}>Listado de ejercicios</Text>
-		  		<Text {...theme.Text}>
-		  			A continuación se muestran todos los ejercicios de la rutiina. Si desconoce como es cada uno puede ver el video de explicación.
-		  		</Text>
-	  		</View>
+		<BackgroundContainer>
+			<View {...theme.Container}>
+		    	<View>
+			  		<Text {...theme.TextHeader}>Listado de ejercicios</Text>
+			  		<Text {...theme.Text}>
+			  			A continuación se muestran todos los ejercicios de la rutiina. Si desconoce como es cada uno puede ver el video de explicación.
+			  		</Text>
+		  		</View>
 
-	  		{
-	  			routine.length ? (
-		  			<FlatList
-		  				style={{marginVertical: 10, width: "100%"}}
-			          	data={routine}
-			          	renderItem={({item,index}) => renderExercisesList(item,index)}
-			          	keyExtractor={(item,index) => index.toString()}
-			        />
-	  			) : null
-	  		}
+		  		{
+		  			routine.length ? (
+			  			<FlatList
+			  				style={{marginVertical: 10, width: "100%"}}
+				          	data={routine}
+				          	renderItem={({item,index}) => renderExercisesList(item,index)}
+				          	keyExtractor={(item,index) => index.toString()}
+				        />
+		  			) : null
+		  		}
 
 
-	  		<Modal
-		        animationType="slide"
-		        transparent={false}
-		        visible={modalVisible}
-		        onRequestClose={() => {
-		          Alert.alert('Modal has been closed.');
-		        }}>
-		        <View style={{ marginTop: 22 }}>
-		            <View style={{alignItems: 'center', marginBottom: 10}}>
-		            	{
-		            		selectedExerciseModal.data && (
-		            			<View>
-		            				<View style={{marginBottom: 10}}>
-		            					<Text {...theme.TextHeader}>{selectedExerciseModal.data.name}</Text>
-		            				</View>
-									<Video
-									  source={selectedExerciseModal.data.gif}
-									  rate={1.0}
-									  volume={1.0}
-									  isMuted={false}
-									  resizeMode="contain"
-									  shouldPlay
-									  isLooping
-									  style={{ width: 300, height: 250 }}
-									/>
-								</View>
-		            		)
-		            	}
-					</View>
+		  		<Modal
+			        animationType="slide"
+			        transparent={false}
+			        visible={modalVisible}
+			        onRequestClose={() => {
+			          Alert.alert('Modal has been closed.');
+			        }}>
+			        <View style={{ marginTop: 22 }}>
+			            <View style={{alignItems: 'center', marginBottom: 10}}>
+			            	{
+			            		selectedExerciseModal.data && (
+			            			<View>
+			            				<View style={{marginBottom: 10}}>
+			            					<Text {...theme.TextHeader}>{selectedExerciseModal.data.name}</Text>
+			            				</View>
+										<Video
+										  source={selectedExerciseModal.data.gif}
+										  rate={1.0}
+										  volume={1.0}
+										  isMuted={false}
+										  resizeMode="contain"
+										  shouldPlay
+										  isLooping
+										  style={{ width: 300, height: 250 }}
+										/>
+									</View>
+			            		)
+			            	}
+						</View>
 
-		            <TouchableOpacity
-		            	{...theme.TouchableOpacity}
-						onPress={() => {
-							setModalVisible(!modalVisible);
-						}}>
-		              	<Text {...theme.TouchableOpacityText}>Cerrar</Text>
-		            </TouchableOpacity>
-		        </View>
-      		</Modal>
+			            <TouchableOpacity
+			            	{...theme.TouchableOpacity}
+							onPress={() => {
+								setModalVisible(!modalVisible);
+							}}>
+			              	<Text {...theme.TouchableOpacityText}>Cerrar</Text>
+			            </TouchableOpacity>
+			        </View>
+	      		</Modal>
 
-	  		<View>
-	  			<TouchableOpacity {...theme.TouchableOpacity} onPress={() => navigation.navigate('StartRoutine',{routine})}>
-					<Text {...theme.TouchableOpacityText}>Comenzar</Text>
-				</TouchableOpacity>
-	  		</View>
-	    </View>
+		  		<View>
+		  			<TouchableOpacity {...theme.TouchableOpacity} onPress={() => navigation.navigate('StartRoutine',{routine})}>
+						<Text {...theme.TouchableOpacityText}>Comenzar</Text>
+					</TouchableOpacity>
+		  		</View>
+		    </View>
+		  </BackgroundContainer>
 	)
 }
 

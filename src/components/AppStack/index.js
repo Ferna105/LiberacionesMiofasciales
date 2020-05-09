@@ -28,7 +28,6 @@ const AppStack = ({theme}) => {
         headerTitleStyle: theme.Header.titleStyle,
       }}
       headerMode="null"
-      drawerContentOptions={theme.Stack.contentOptions}
     >
       <Stack.Screen 
         name="HomeScreen" 
@@ -41,21 +40,18 @@ const AppStack = ({theme}) => {
         component={CreateRoutine} 
         options={{
           title: 'Crear rutina',
-          drawerIcon: config => <MaterialCommunityIcons {...theme.TouchableOpacityIcon} name="run" size={17} />
         }}/>
       <Stack.Screen 
         name="Explore" 
         component={Explore} 
         options={{
           title: 'Explorar',
-          drawerIcon: config => <FontAwesome {...theme.TouchableOpacityIcon} name="dribbble" size={20} />
         }}/>
       <Stack.Screen 
         name="Configuration" 
         component={Configuration} 
         options={{
           title: 'Configuración',
-          drawerIcon: config => <FontAwesome {...theme.TouchableOpacityIcon} name="cog" size={20} />
         }}/>
     </Stack.Navigator>
   );

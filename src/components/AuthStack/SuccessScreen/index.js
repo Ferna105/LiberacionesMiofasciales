@@ -3,6 +3,7 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { AuthContext } from '@components/context';
+import BackgroundContainer from '@components/BackgroundContainer';
 
 const SuccessScreen = ({ navigation, theme, route }) => {
 
@@ -17,36 +18,38 @@ const SuccessScreen = ({ navigation, theme, route }) => {
   }
 
   return (
-    <View {...theme.Container}>
-      <View>
-        <Text {...theme.TextHeader}>¡Perfil completado!</Text>
+    <BackgroundContainer>
+      <View {...theme.Container}>
         <View>
-          {
-            route.params.status ? (
-              <View>
-                <Text {...theme.Text}>Deportes:</Text>
-                  {
-                    route.params.sports.map((sport,key) => {
-                      return <Text key={key} {...theme.Text}>- {sport.name}</Text>
-                    })
-                  }
-              </View>
-            ) : null
-          }
+          <Text {...theme.TextHeader}>¡Perfil completado!</Text>
+          <View>
+            {
+              route.params.status ? (
+                <View>
+                  <Text {...theme.Text}>Deportes:</Text>
+                    {
+                      route.params.sports.map((sport,key) => {
+                        return <Text key={key} {...theme.Text}>- {sport.name}</Text>
+                      })
+                    }
+                </View>
+              ) : null
+            }
+          </View>
+        </View>
+        <View>
+          <Ionicons size={50} name="md-checkmark" />
+        </View>
+        <View style={{flexDirection: "row"}}>
+          <TouchableOpacity
+            {...theme.TouchableOpacity}
+            onPress={() => handleStart()}
+          >
+            <Text {...theme.TouchableOpacityText}>Comenzar</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View>
-        <Ionicons size={50} name="md-checkmark" />
-      </View>
-      <View style={{flexDirection: "row"}}>
-        <TouchableOpacity
-          {...theme.TouchableOpacity}
-          onPress={() => handleStart()}
-        >
-          <Text {...theme.TouchableOpacityText}>Comenzar</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </BackgroundContainer>
   );
 }
 
