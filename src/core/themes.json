@@ -27,7 +27,9 @@
     },
     Header: {
       style: {
-        backgroundColor: "#0f4c81",
+        backgroundColor: "transparent",
+        elevation: 0, // remove shadow on Android
+          shadowOpacity: 0, // remove shadow on iOS
       },
       tintColor: "#e5dfdf",
       titleStyle: {
@@ -50,7 +52,7 @@
     },
     TouchableOpacityText:{
       style: {
-        color: "#e5dfdf",
+        color: "white",
         fontFamily: "Raleway-Bold"
       }
     },
@@ -63,7 +65,7 @@
     TouchableOpacityIcon: {
       size: 40,
       style: {
-        color: "#e5dfdf"
+        color: "rgb(0,88,186)",
       },
     },
     Text: {
@@ -81,8 +83,8 @@
       }
     },
     CheckBox: {
-      checkedColor: "#0f4c81",
-      uncheckedColor: "#0f4c81",
+      checkedColor: "rgb(65,189,252)",
+      uncheckedColor: "rgb(65,189,252)",
       fontFamily: "Raleway-Regular",
       containerStyle: {
         backgroundColor: "transparent",

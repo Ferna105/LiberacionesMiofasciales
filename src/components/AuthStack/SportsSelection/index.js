@@ -6,7 +6,7 @@ import { CheckBox,ListItem } from 'react-native-elements';
 import { withTheme } from '@theme/themeProvider';
 import database from '@theme/database.js';
 
-import BackgroundContainer from '@components/BackgroundContainer';
+import BackgroundContainer3 from '@components/BackgroundContainer3';
 
 
 const StatusSelection = ({ navigation, theme, route }) => {
@@ -46,11 +46,11 @@ const StatusSelection = ({ navigation, theme, route }) => {
   }
 
   return (
-    <BackgroundContainer>
+    <BackgroundContainer3>
       <View {...theme.Container}>
         <View>
-          <Text {...theme.TextHeader}>¿Qué deporte practica?</Text>
-          <Text {...theme.Text}>En las rutinas de elongación se tienen en cuenta las cadenas musculares que son mayormente afectadas en cada deporte, favoreciendo el rendimiento del atleta</Text>
+          <Text style={{textAlign: 'center',color: "#e5dfdf",fontFamily: 'Raleway-Bold',fontSize: 17, marginBottom: 10}}>¿Qué deporte practica?</Text>
+          <Text style={{textAlign: 'center',color: "#e5dfdf",fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10}}>En las rutinas de elongación se tienen en cuenta las cadenas musculares que son mayormente afectadas en cada deporte, favoreciendo el rendimiento del atleta</Text>
         </View>
         <ScrollView style={{textAlign: 'left', width: '100%'}}>
           {
@@ -61,21 +61,26 @@ const StatusSelection = ({ navigation, theme, route }) => {
                   {...theme.CheckBox} 
                   checked={JSON.parse(sport.checked)} 
                   title={sport.name}
+                  textStyle={{
+                    color: 'white',
+                    fontWeight: '100',
+                  }}
                   onPress={() => handleCheckBox(sport)} 
                 />
               )
             })
           }
         </ScrollView>
-        <TouchableOpacity
-          {...theme.TouchableOpacity}
-          onPress={() => handleSports()}
-        >
-          <MaterialIcons {...theme.TouchableOpacityIcon} name="navigate-next" />
-          <Text {...theme.TouchableOpacityText}>Siguiente</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection: "row"}}>
+          <TouchableOpacity
+            style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 50,borderRadius:5,alignItems: "center",marginVertical: 10}}
+            onPress={() => handleSports()}
+          >
+            <Text {...theme.TouchableOpacityText}>Siguiente</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </BackgroundContainer>
+    </BackgroundContainer3>
   );
 }
 

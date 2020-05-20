@@ -12,26 +12,35 @@ import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
 import { getRoutineByRid } from '@theme/queries';
 import AccessoryExercises from './../AccessoryExercises';
-import BackgroundContainer from '@components/BackgroundContainer';
+import BackgroundContainer3 from '@components/BackgroundContainer3';
 
 const AddAccessory = ({theme,navigation,route}) => {
 
 	const [chainsModalVisible,setChainsModalVisible] = useState(false);
 
 	return (
-		<BackgroundContainer>
+		<BackgroundContainer3>
 			<View {...theme.Container}>
-				<Text {...theme.Text}>Genial, tu rutina ya esta armada, desearias agregar algunos ejercicios mas?</Text>
+				<View>
+		  		<Text style={{textAlign: 'center',color: "#e5dfdf",fontFamily: 'Raleway-Bold',fontSize: 17, marginBottom: 10}}>Genial, tu rutina ya esta armada</Text>
+		  		<Text style={{textAlign: 'center',color: "#e5dfdf",fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10}}>
+		  			Si sentís molestias musculares podés agregar ejercicios ¿Desearías adicionar algunos más?
+		  		</Text>
+	  		</View>
+
 				<View style={{flexDirection: "row"}}>
+
 		      <TouchableOpacity
-		      	{...theme.TouchableOpacity}
+		      	style={{flex: 1, elevation: 5,backgroundColor: "rgb(65,189,252)",padding: 10,borderRadius:5,alignItems: "center",margin: 10, marginLeft: 0}}
+      			activeOpacity={.5}
 		      	onPress={() => navigation.navigate('AccessoryExercises',route.params)}
 		      >
 		      	<Ionicons {...theme.TouchableOpacityIcon} name="md-checkmark" />
 		      	<Text {...theme.TouchableOpacityText}>SI</Text>
 		      </TouchableOpacity>
 		      <TouchableOpacity
-		      	{...theme.TouchableOpacity}
+		      	style={{flex: 1, elevation: 5,backgroundColor: "rgb(65,189,252)",padding: 10,borderRadius:5,alignItems: "center",margin: 10, marginLeft: 0}}
+      			activeOpacity={.5}
 		      	onPress={() => navigation.navigate('RoutineInformation',route.params)}
 		      >
 		      	<Ionicons {...theme.TouchableOpacityIcon} name="ios-close" />
@@ -39,7 +48,7 @@ const AddAccessory = ({theme,navigation,route}) => {
 		      </TouchableOpacity>
 	    	</View>
 			</View>
-		</BackgroundContainer>
+		</BackgroundContainer3>
 	)
 }
 

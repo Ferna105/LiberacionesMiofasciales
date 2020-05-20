@@ -1,19 +1,18 @@
 import React from 'react';
 import {
 	Text,
-	View
+	View,
+	Dimensions
 } from 'react-native';
 import { Video } from 'expo-av';
 
 import { withTheme } from '@theme/themeProvider';
+const windowWidth = Dimensions.get('window').width;
 
-const CurrentExercise = ({theme, exercise, style}) => {
+const CurrentExercise = ({theme, exercise}) => {
 	return (
-		<View style={style}>
-			<View style={{alignItems: 'center', marginBottom: 10, flex: 1}}>
-				<Text {...theme.TextHeader}>{exercise.name}</Text>
-			</View>
-			<View style={{alignItems: 'center', marginBottom: 10, flex: 8}}>
+		<View >
+			<View style={{marginBottom: 10}}>
 				<Video
 				  source={exercise.gif}
 				  rate={1.0}
@@ -22,8 +21,11 @@ const CurrentExercise = ({theme, exercise, style}) => {
 				  resizeMode="contain"
 				  shouldPlay
 				  isLooping
-				  style={{ width: 300, height: 250 }}
+				  style={{ width: windowWidth, height: 450 }}
 				/>
+			</View>
+			<View style={{marginBottom: 10}}>
+				<Text {...theme.TextHeader}>{exercise.name}</Text>
 			</View>
 		</View>
 	)

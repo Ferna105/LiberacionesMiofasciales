@@ -27,7 +27,7 @@ const AppStack = ({theme}) => {
         headerTintColor: theme.Header.tintColor,
         headerTitleStyle: theme.Header.titleStyle,
       }}
-      headerMode="null"
+      headerMode="screen"
     >
       <Stack.Screen 
         name="HomeScreen" 
@@ -39,18 +39,21 @@ const AppStack = ({theme}) => {
         name="CreateRoutine" 
         component={CreateRoutine} 
         options={{
+          headerShown: false,
           title: 'Crear rutina',
         }}/>
       <Stack.Screen 
         name="Explore" 
         component={Explore} 
         options={{
+          headerShown: false,
           title: 'Explorar',
         }}/>
       <Stack.Screen 
         name="Configuration" 
         component={Configuration} 
         options={{
+          headerShown: false,
           title: 'Configuración',
         }}/>
     </Stack.Navigator>

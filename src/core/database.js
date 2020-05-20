@@ -1,13 +1,13 @@
 const database = {
 	tables: {
 		chains: [
-			{"cid":"2","name":"Cadena anterior de los brazos","image":require("@assets/Cadenas/CADENA_ANTERIOR_DE_LOS_BRAZOS.jpg")},
-			{"cid":"3","name":"Cadena posterior de los brazos","image":require("@assets/Cadenas/CADENA_POSTERIOR_DE_LOS_BRAZOS.jpg")},
-			{"cid":"4","name":"Cadena posterior superior","image":require("@assets/Cadenas/CADENA_POSTERIOR_SUPERIOR.jpg")},
-			{"cid":"5","name":"Cadena posterior inferior","image":require("@assets/Cadenas/CADENA_POSTERIOR_INFERIOR.jpg")},
-			{"cid":"6","name":"Cadena anterior","image":require("@assets/Cadenas/CADENA_ANTERIOR.jpg")},
-			{"cid":"7","name":"Cuello","image":require("@assets/Cadenas/CUELLO.jpg")},
-			{"cid":"8","name":"Cadena lateral","image":require("@assets/Cadenas/CADENA_LATERAL.jpg")}
+			{"cid":"2","name":"Cadena anterior de los brazos","image":require("@assets/Cadenas/CADENA_ANTERIOR_DE_LOS_BRAZOS.png")},
+			{"cid":"3","name":"Cadena posterior de los brazos","image":require("@assets/Cadenas/CADENA_POSTERIOR_DE_LOS_BRAZOS.png")},
+			{"cid":"4","name":"Cadena posterior superior","image":require("@assets/Cadenas/CADENA_POSTERIOR_SUPERIOR.png")},
+			{"cid":"5","name":"Cadena posterior inferior","image":require("@assets/Cadenas/CADENA_POSTERIOR_INFERIOR.png")},
+			{"cid":"6","name":"Cadena anterior","image":require("@assets/Cadenas/CADENA_ANTERIOR.png")},
+			{"cid":"7","name":"Cuello","image":require("@assets/Cadenas/CUELLO.png")},
+			{"cid":"8","name":"Cadena lateral","image":require("@assets/Cadenas/CADENA_LATERAL.png")}
 		],
 		exercises: [
 			{"eid":"1","name":"Abrazarse","description":"","gif":require("@assets/Ejercicios/ABRAZARSE.mp4"),"cid":"4"},

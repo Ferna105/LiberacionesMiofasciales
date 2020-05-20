@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { AuthContext } from '@components/context';
-import BackgroundContainer from '@components/BackgroundContainer';
+import BackgroundContainer3 from '@components/BackgroundContainer3';
 
 const SuccessScreen = ({ navigation, theme, route }) => {
 
@@ -18,18 +18,20 @@ const SuccessScreen = ({ navigation, theme, route }) => {
   }
 
   return (
-    <BackgroundContainer>
+    <BackgroundContainer3>
       <View {...theme.Container}>
         <View>
-          <Text {...theme.TextHeader}>¡Perfil completado!</Text>
+          <Text style={{textAlign: 'center',color: "#e5dfdf",fontFamily: 'Raleway-Bold',fontSize: 21, marginBottom: 10}}>¡Perfil completado!</Text>
           <View>
             {
               route.params.status ? (
                 <View>
-                  <Text {...theme.Text}>Deportes:</Text>
                     {
                       route.params.sports.map((sport,key) => {
-                        return <Text key={key} {...theme.Text}>- {sport.name}</Text>
+                        return (
+                          <Text key={key} style={{textAlign: 'left',color: "#e5dfdf",fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10}}>
+                            - {sport.name}
+                          </Text>)
                       })
                     }
                 </View>
@@ -38,18 +40,18 @@ const SuccessScreen = ({ navigation, theme, route }) => {
           </View>
         </View>
         <View>
-          <Ionicons size={50} name="md-checkmark" />
+          <Ionicons size={70} style={{color: "white"}} name="md-checkmark" />
         </View>
         <View style={{flexDirection: "row"}}>
           <TouchableOpacity
-            {...theme.TouchableOpacity}
+            style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 50,borderRadius:5,alignItems: "center",marginVertical: 10}}
             onPress={() => handleStart()}
           >
             <Text {...theme.TouchableOpacityText}>Comenzar</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </BackgroundContainer>
+    </BackgroundContainer3>
   );
 }
 
