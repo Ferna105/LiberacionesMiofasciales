@@ -6,13 +6,16 @@ import {
 	Image,
 	FlatList,
 	ScrollView,
-	Modal
+	Modal,
+	Alert,
+	Dimensions
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
 import { getGeneratedRoutine } from '@theme/queries';
 import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
+const windowWidth = Dimensions.get('window').width;
 
 const RoutineInformation = ({theme,navigation,route}) => {
 
@@ -33,6 +36,17 @@ const RoutineInformation = ({theme,navigation,route}) => {
 	const openExerciseInModal = (exercise) => {
 		setSelectedExerciseModal(exercise);
 		setModalVisible(true);
+	}
+
+	const onPressStart = () => {
+		Alert.alert(
+      "Alerta",
+      "Si te pasas y duele no sirve",
+      [
+        { text: "Entendido", onPress: () => navigation.navigate('StartRoutine',{routine}) }
+      ],
+      { cancelable: false }
+    );
 	}
 
 	const renderExercisesList = (exercise,key) => {
@@ -71,42 +85,53 @@ const RoutineInformation = ({theme,navigation,route}) => {
 	  		}
 	  		<Modal
 	        animationType="slide"
-	        transparent={false}
+        	transparent={true}
 	        visible={modalVisible}
 	        onRequestClose={() => {
 	          Alert.alert('Modal has been closed.');
 	        }}>
-	        <View style={{ marginTop: 22 }}>
-	          <View style={{alignItems: 'center', marginBottom: 10}}>
-	          	{
-	          		selectedExerciseModal.data && (
-	          			<View>
-	          				<View style={{marginBottom: 10}}>
-	          					<Text {...theme.TextHeader}>{selectedExerciseModal.data.name}</Text>
-	          				</View>
-										<Video
-										  source={selectedExerciseModal.data.gif}
-										  rate={1.0}
-										  volume={1.0}
-										  isMuted={false}
-										  resizeMode="contain"
-										  shouldPlay
-										  isLooping
-										  style={{ width: 300, height: 250 }}
-										/>
-									</View>
-	          		)
-	          	}
-						</View>
-		        <TouchableOpacity {...theme.TouchableOpacity} onPress={() => {setModalVisible(!modalVisible);}}>
+	        <BackgroundContainer3>
+	        	<View {...theme.Container}>
+			        <View>
+			          <View style={{alignItems: 'center', marginBottom: 10}}>
+			          	{
+			          		selectedExerciseModal && (
+			          			<View>
+			          				<View style={{paddingHorizontal: 20}}>
+										  		<Text style={{color: "#e5dfdf",fontFamily: 'Raleway-Bold',fontSize: 21, marginBottom: 10}}>{selectedExerciseModal.name}</Text>
+									  		</View>
+												<Video
+												  source={selectedExerciseModal.gif}
+												  rate={1.0}
+												  volume={1.0}
+												  isMuted={false}
+												  resizeMode="contain"
+												  shouldPlay
+												  isLooping
+												  style={{ width: windowWidth, height: 300, marginBottom: 20 }}
+												/>
+												<ScrollView>
+										  		<Text style={{textAlign: 'center',color: "#e5dfdf",fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10}}>
+										  			{selectedExerciseModal.description}
+										  		</Text>
+										  	</ScrollView>
+											</View>
+			          		)
+			          	}
+								</View>
+			        </View>
+			      </View>
+		      </BackgroundContainer3>
+		      <View style={{padding: 20}}>
+		        <TouchableOpacity activeOpacity={1} style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 50,borderRadius:5,alignItems: "center",marginVertical: 10}} onPress={() => {setModalVisible(!modalVisible);}}>
 		        	<Text {...theme.TouchableOpacityText}>Cerrar</Text>
 		        </TouchableOpacity>
-	        </View>
+		      </View>
 	  		</Modal>
 
 	  		<View>
 	  			<TouchableOpacity style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 50,borderRadius:5,alignItems: "center",marginVertical: 10}}
-		    	 onPress={() => navigation.navigate('StartRoutine',{routine})} >
+		    	 onPress={() => onPressStart()} >
 		    		<Text {...theme.TouchableOpacityText}>Comenzar</Text>
 		    	</TouchableOpacity>
 	  		</View>

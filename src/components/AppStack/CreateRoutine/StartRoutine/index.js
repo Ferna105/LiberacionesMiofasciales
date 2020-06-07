@@ -3,15 +3,20 @@ import {
 	Text,
 	View,
 	TouchableOpacity,
-	ProgressBarAndroid
+	ProgressBarAndroid,
+	Dimensions
 } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import CurrentExercise from './CurrentExercise';
 import {Audio} from 'expo-av';
+import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+const windowWidth = Dimensions.get('window').width;
 
 const StartRoutine = ({theme,navigation,route}) => {
-	console.log(route.params.routine[0]);
+
 	const startSound = new Audio.Sound();
 	const restSound = new Audio.Sound();
 
@@ -29,13 +34,18 @@ const StartRoutine = ({theme,navigation,route}) => {
 	const [currentExercise, setCurrentExcercise] = useState(0);
 
 	useEffect(() => {
+		navigation.setOptions({ title: 'Tiempo total: ' + seconds.toHHMMSS() })
+	},[seconds]);
+
+	useEffect(() => {
+
 
 		let interval = null;
 		let totalInterval = null;
 		let exerciseIterval = null;
 		let restInterval = null;
 
-		totalInterval = setInterval(() => {
+		totalInterval = setTimeout(() => {
 			setTotalSeconds(totalSeconds => totalSeconds + 1)
 			
 
@@ -77,7 +87,7 @@ const StartRoutine = ({theme,navigation,route}) => {
 		
 	    
 	    return () => {
-	    	clearInterval(totalInterval);
+	    	clearTimeout(totalInterval);
 	    };
 
 	});
@@ -140,19 +150,48 @@ const StartRoutine = ({theme,navigation,route}) => {
 	return (
 		<BackgroundContainer3>
 			<View {...theme.Container}>
-				<View>
-		    		<CurrentExercise exercise={route.params.routine[currentExercise]}  />
+				<View style={{marginBottom: 10}}>
+					<Text style={{color: "#e5dfdf",fontFamily: 'Raleway-Bold',fontSize: 19,textAlign: "center"}}>{route.params.routine[currentExercise].name}</Text>
 				</View>
-				<View >
-					<View>
-						<Text {...theme.Text} >Tiempo total</Text>
-						<Text {...theme.TextHeader} >{seconds.toHHMMSS()}</Text>
+				<View style={{marginBottom: 5}}>
+					<Video
+					  source={route.params.routine[currentExercise].gif}
+					  rate={1.0}
+					  volume={1.0}
+					  isMuted={false}
+					  resizeMode="contain"
+					  shouldPlay
+					  isLooping
+					  style={{ width: windowWidth, height: 450 }}
+					/>
+				</View>
+				<View style={{flexDirection: 'row'}}>
+					<View style={{flex: 1}} >
+						<View>
+							{ isRest ? 
+								<Text style={{textAlign:'center'}}  >
+									<MaterialCommunityIcons name="progress-clock" size={55} color="white" />
+									<Text style={{ color: "#FF0000",fontSize: 60,textAlign: "center"}}>
+										{secondsRest.toSS()}
+									</Text>
+								</Text> : 
+								<Text style={{textAlign:'center'}} >
+									<MaterialCommunityIcons name="progress-clock" size={55} color="white" />
+									<Text style={{ color: "#00FF00",fontSize: 60,textAlign: "center"}}>
+										{secondsExercise.toSS()}
+									</Text>
+								</Text>
+							}
+						</View>
+						<View>
+							
+						</View>
 					</View>
-					<View>
-						<Text {...theme.TextHeader} >{secondsExercise.toSS()}</Text>
-					</View>
-					<View>
-						<Text {...theme.TextHeader} >{secondsRest.toSS()}</Text>
+					<View style={{flexDirection: "row", flex: 1,justifyContent: 'center'}}>
+						<TouchableOpacity style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 40,borderRadius:5,alignItems: "center",marginVertical: 10}}
+			    	 onPress={() => pauseRoutine()} >
+			    		<Text {...theme.TouchableOpacityText}>{isActive ? "Pausar" : "Comenzar"}</Text>
+			    	</TouchableOpacity>
 					</View>
 				</View>
 				<View >
@@ -162,18 +201,8 @@ const StartRoutine = ({theme,navigation,route}) => {
 			          indeterminate={false}
 			          progress={ calculateProgress() }
 					/>
-					<View style={{flexDirection: "row", justifyContent: 'center'}}>
-						<TouchableOpacity style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 50,borderRadius:5,alignItems: "center",marginVertical: 10}}
-				    	 onPress={() => pauseRoutine()} >
-				    		<Text {...theme.TouchableOpacityText}>{isActive ? "Pausar" : "Comenzar"}</Text>
-				    	</TouchableOpacity>
-				    	<TouchableOpacity style={{elevation: 5,backgroundColor: "rgb(65,189,252)",paddingVertical: 20, paddingHorizontal: 50,borderRadius:5,alignItems: "center",marginVertical: 10}}
-				    	 onPress={() => changePoint()} >
-				    		<Text {...theme.TouchableOpacityText}>Forzar</Text>
-				    	</TouchableOpacity>
-					</View>
 				</View>
-		    </View>
+	    </View>
 		</BackgroundContainer3>
 	)
 }

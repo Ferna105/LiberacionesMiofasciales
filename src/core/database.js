@@ -16,7 +16,7 @@ const database = {
 			{"eid":"4","name":"Araña","description":"","gif":require("@assets/Ejercicios/ARAÑA.mp4"),"cid":"6"},
 			{"eid":"5","name":"Biceps pero con puño (Izquierda)","description":"","gif":require("@assets/Ejercicios/BICEPS_PERO_CON_PUÑO.mp4"),"cid":"1"},
 			{"eid":"6","name":"Biceps pero con puño (Derecha)","description":"","gif":require("@assets/Ejercicios/BICEPS_PERO_CON_PUÑO.mp4"),"cid":"1"},
-			{"eid":"7","name":"Bolita","description":"","gif":require("@assets/Ejercicios/BOLITA.mp4"),"cid":"1"},
+			{"eid":"7","name":"Bolita","description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","gif":require("@assets/Ejercicios/BOLITA.mp4"),"cid":"1"},
 			{"eid":"8","name":"Cruz (Izquierda)","description":"","gif":require("@assets/Ejercicios/CRUZ.mp4"),"cid":"8"},
 			{"eid":"9","name":"Cruz (Derecha)","description":"","gif":require("@assets/Ejercicios/CRUZ.mp4"),"cid":"8"},
 			{"eid":"10","name":"Cruzar mano atrás (Izquierda)","description":"","gif":require("@assets/Ejercicios/CRUZAR_MANOS_ATRAS.mp4"),"cid":"1"},

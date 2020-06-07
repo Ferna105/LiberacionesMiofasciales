@@ -3,7 +3,8 @@ import database from '@theme/database.js';
 export const getRoutinesByType = (type) => {
 
 	var {routines} = database.tables;
-	var result = routines.filter(routine => routine.type === type);
+	var result = routines.find(routine => routine.type === type);
+	result.exercisesLength = getRoutineLength(result.rid); 
 	return result;
 
 }
@@ -11,7 +12,8 @@ export const getRoutinesByType = (type) => {
 export const getRoutineBySid = (sid) => {
 
 	var {routines} = database.tables;
-	var result = routines.filter(routine => routine.sid === sid);
+	var result = routines.find(routine => routine.sid === sid);
+	result.exercisesLength = getRoutineLength(result.rid); 
 	return result;
 
 }
@@ -40,10 +42,16 @@ export const getChains = () => {
 	
 }
 
+export const getRoutineLength = (rid) => {
+	var {exercises_routines} = database.tables;
+	var length = exercises_routines.filter(er => er.rid == rid).length;
+	return length;
+}
 
 export const getUserRoutines = (profile) => {
-	var {routines} = database.tables;
-	var routines = getRoutinesByType('general');
+
+	var routines = Array();
+	routines = routines.concat(getRoutinesByType('general'));
 
 	if( profile.status ){
 		var sportsRoutines = Array();
@@ -51,6 +59,7 @@ export const getUserRoutines = (profile) => {
 			routines = routines.concat(getRoutineBySid(sport.sid));
 		});
 	}
+
 	return routines;	
 }
 
@@ -78,5 +87,5 @@ export const getGeneratedRoutine = (userSelection) => {
 	}
 
 	return exercisesList;
-	console.log(exercisesList,"RUTINA");
+
 }

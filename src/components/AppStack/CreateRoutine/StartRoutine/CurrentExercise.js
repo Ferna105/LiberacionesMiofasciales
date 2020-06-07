@@ -10,6 +10,7 @@ import { withTheme } from '@theme/themeProvider';
 const windowWidth = Dimensions.get('window').width;
 
 const CurrentExercise = ({theme, exercise}) => {
+
 	return (
 		<View >
 			<View style={{marginBottom: 10}}>
