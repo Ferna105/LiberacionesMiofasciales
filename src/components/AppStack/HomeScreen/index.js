@@ -17,14 +17,15 @@ const HomeScreen = ({ navigation, theme }) => {
         	<View style={{flex: 1}}>
         		<View style={{flex: 1, flexDirection: 'row'}}>
         			<View  style={{flex: 1}}>
-    	    			<TouchableOpacity 
-                            style={{elevation: 5,backgroundColor: "rgb(65,189,252)", alignItems: 'center',paddingVertical: 20, paddingHorizontal: 10,borderRadius:5,margin: 10}}
-                            onPress={() => {signOut()}}>
+						<TouchableOpacity 
+							onPress={() => { navigation.navigate("Configuration")}}
+                            style={{elevation: 5,backgroundColor: "rgb(65,189,252)", alignItems: 'center',paddingVertical: 20, paddingHorizontal: 10,borderRadius:5,margin: 10}}>
     	    				<Text {...theme.TouchableOpacityText}>Configuración</Text>
     	    			</TouchableOpacity>
     	    		</View>
     	    		<View style={{flex: 1}}>
-    	    			<TouchableOpacity 
+						<TouchableOpacity 
+							onPress={() => {signOut()}}
                             style={{elevation: 5,backgroundColor: "rgb(65,189,252)", alignItems: 'center',paddingVertical: 20, paddingHorizontal: 10,borderRadius:5,margin: 10}}
                             >
     	    				<Text {...theme.TouchableOpacityText}>Explorar</Text>

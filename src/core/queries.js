@@ -81,7 +81,9 @@ export const getGeneratedRoutine = (userSelection) => {
 		userSelection.chains.map((ch,key) => {
 			if(ch.selected){
 				var c = getExerciseByCid(ch.cid);
-				exercisesList = exercisesList.concat(c);
+				for (var i = 0; i < ch.level; i++) {
+					exercisesList = exercisesList.concat(c);
+				}
 			}
 		})
 	}

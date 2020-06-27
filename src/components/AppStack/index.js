@@ -53,7 +53,6 @@ const AppStack = ({theme}) => {
         name="Configuration" 
         component={Configuration} 
         options={{
-          headerShown: false,
           title: 'Configuración',
         }}/>
     </Stack.Navigator>
