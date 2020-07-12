@@ -41,7 +41,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 	const onPressStart = () => {
 		Alert.alert(
 			"Alerta",
-			"Si te pasas y duele no sirve",
+			"En la elongación se debe sentir tención, no dolor.",
 			[
 				{ text: "Entendido", onPress: () => navigation.navigate('StartRoutine', { routine }) }
 			],
