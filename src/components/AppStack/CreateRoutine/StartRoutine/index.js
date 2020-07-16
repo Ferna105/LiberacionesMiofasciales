@@ -7,7 +7,6 @@ import {
 	Dimensions
 } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
-import CurrentExercise from './CurrentExercise';
 import {Audio} from 'expo-av';
 import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';

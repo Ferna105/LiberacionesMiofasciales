@@ -177,7 +177,7 @@ const HomeScreen = ({ navigation, theme }) => {
 					<View style={{ flex: 1 }}>
 						<TouchableOpacity
 							style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", alignItems: 'center', paddingVertical: 20, paddingHorizontal: 10, borderRadius: 5, margin: 10 }}
-							onPress={() => { navigation.navigate('CreateRoutine') }}>
+							onPress={() => { navigation.navigate('SelectRoutines') }}>
 							<Text {...theme.TouchableOpacityText}>Comenzar</Text>
 						</TouchableOpacity>
 					</View>

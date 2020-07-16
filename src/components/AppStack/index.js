@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,TransitionPresets } from '@react-navigation/stack';
 
 import HomeScreen from './HomeScreen';
-import CreateRoutine from './CreateRoutine';
+
+import SelectRoutines from './CreateRoutine/SelectRoutines';
+import AddAccessory from './CreateRoutine/AddAccessory';
+import AccessoryExercises from './CreateRoutine/AccessoryExercises';
+import RoutineInformation from './CreateRoutine/RoutineInformation';
+import StartRoutine from './CreateRoutine/StartRoutine';
+import Congratulations from './CreateRoutine/Congratulations';
+
 import Explore from './Explore';
 import Configuration from './Configuration';
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { withTheme } from '@theme/themeProvider';
 import { AuthContext } from '@components/context';
@@ -26,6 +32,7 @@ const AppStack = ({theme}) => {
         headerStyle: theme.Header.style,
         headerTintColor: theme.Header.tintColor,
         headerTitleStyle: theme.Header.titleStyle,
+        ...TransitionPresets.SlideFromRightIOS,
       }}
       headerMode="screen"
     >
@@ -36,11 +43,40 @@ const AppStack = ({theme}) => {
           title: 'Liberaciones Miofasciales',
         }}/>
       <Stack.Screen 
-        name="CreateRoutine" 
-        component={CreateRoutine} 
+        name="SelectRoutines" 
+        component={SelectRoutines} 
         options={{
-          headerShown: false,
-          title: 'Crear rutina',
+          title: 'Seleccionar rutinas',
+        }}/>
+      <Stack.Screen 
+        name="AddAccessory" 
+        component={AddAccessory} 
+        options={{
+          title: 'Ejercicios accesorios',
+        }}/>
+      <Stack.Screen 
+        name="AccessoryExercises" 
+        component={AccessoryExercises} 
+        options={{
+          title: 'Ejercicios accesorios',
+        }}/>
+      <Stack.Screen 
+        name="RoutineInformation" 
+        component={RoutineInformation} 
+        options={{
+          title: 'Rutina armada',
+        }}/>
+      <Stack.Screen 
+        name="StartRoutine" 
+        component={StartRoutine} 
+        options={{
+          title: 'Elongación general',
+        }}/>
+      <Stack.Screen 
+        name="Congratulations" 
+        component={Congratulations} 
+        options={{
+          title: 'Felicitaciones',
         }}/>
       <Stack.Screen 
         name="Explore" 
