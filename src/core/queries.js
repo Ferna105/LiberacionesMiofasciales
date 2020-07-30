@@ -35,6 +35,11 @@ export const getExerciseByCid = (cid) => {
 	return chain_exercises;	
 }
 
+export const getExercises = () => {
+	var {exercises} = database.tables;
+	return exercises;	
+}
+
 export const getChains = () => {
 
 	var {chains} = database.tables;

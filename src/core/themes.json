@@ -22,7 +22,7 @@
       }
     },
     ActivityIndicator: {
-      color: "#0f4c81",
+      color: "#FFF",
       size: 50
     },
     Header: {

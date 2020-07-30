@@ -49,6 +49,12 @@ const carouselItems = [
 	},
 	{
 		title: '¿Tenés problemas para dormir? Elongar libera tensiones y te ayuda a descansar de noche.',
+	},
+	{
+		title: 'Si la responsabilidad y el compromiso no ordenan las acciones del presente... El futuro será más de lo mismo.',
+	},
+	{
+		title: 'En la pestaña EXPLORAR vas a encontrar todos los ejercicios con una descripción. leelas para que tus sesiones de elongación sean óptimas'
 	}
 ];
 
@@ -63,63 +69,67 @@ const HomeScreen = ({ navigation, theme }) => {
 		let imagePath;
 		switch (index) {
 			case 0: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider0.png');
 				break;
 			}
 			case 1: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider1.png');
 				break;
 			}
 			case 2: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider2.png');
 				break;
 			}
 			case 3: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider3.png');
 				break;
 			}
 			case 4: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider4.png');
 				break;
 			}
 			case 5: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider5.png');
 				break;
 			}
 			case 6: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider6.png');
 				break;
 			}
 			case 7: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider7.png');
 				break;
 			}
 			case 8: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider8.png');
 				break;
 			}
 			case 9: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider9.png');
 				break;
 			}
 			case 10: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider10.png');
 				break;
 			}
 			case 11: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider11.png');
 				break;
 			}
 			case 12: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider12.png');
 				break;
 			}
 			case 13: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider13.png');
 				break;
 			}
 			case 14: {
-				imagePath = require('@assets/images/icon.png');
+				imagePath = require('@assets/slider/slider14.png');
+				break;
+			}
+			case 15: {
+				imagePath = require('@assets/slider/slider15.png');
 				break;
 			}
 			default: {
@@ -167,7 +177,7 @@ const HomeScreen = ({ navigation, theme }) => {
 						</View>
 						<View style={{ flex: 1 }}>
 							<TouchableOpacity
-								onPress={() => { signOut() }}
+								onPress={() => { navigation.navigate("Explore") }}
 								style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", alignItems: 'center', paddingVertical: 20, paddingHorizontal: 10, borderRadius: 5, margin: 10 }}
 							>
 								<Text {...theme.TouchableOpacityText}>Explorar</Text>

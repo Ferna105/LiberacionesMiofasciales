@@ -13,10 +13,12 @@ const Congratulations = ({theme, navigation}) => {
 	return (
 		<BackgroundContainer3>
 			<View {...theme.Container}>
-				<Text {...theme.TextHeader}>Haz finalizado la rutina con éxito</Text>
-				<Ionicons name="md-checkmark" size={70} />
-				<TouchableOpacity {...theme.TouchableOpacity} onPress={() => navigation.navigate("HomeScreen")}>
-					<Text {...theme.TouchableOpacityText}>Volver al la sección principal</Text>
+				<Text {...theme.TextHeader}>¡Finalizaste la rutina con éxito!</Text>
+				<Ionicons name="md-checkmark" size={70} color="white"/>
+				<TouchableOpacity
+					style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", alignItems: 'center', paddingVertical: 20, paddingHorizontal: 10, borderRadius: 5, margin: 10 }}
+					onPress={() => navigation.navigate("HomeScreen")}>
+					<Text {...theme.TouchableOpacityText}>VOLVER AL PRINCIPIO</Text>
 				</TouchableOpacity>
 			</View>
 		</BackgroundContainer3>

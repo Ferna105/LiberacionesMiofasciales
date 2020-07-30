@@ -82,7 +82,6 @@ const AppStack = ({theme}) => {
         name="Explore" 
         component={Explore} 
         options={{
-          headerShown: false,
           title: 'Explorar',
         }}/>
       <Stack.Screen 

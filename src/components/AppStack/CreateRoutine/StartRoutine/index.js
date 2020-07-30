@@ -19,10 +19,10 @@ const StartRoutine = ({theme,navigation,route}) => {
 	const startSound = new Audio.Sound();
 	const restSound = new Audio.Sound();
 
-	const [secondsExercise, setSecondsExercise] = useState(10)
+	const [secondsExercise, setSecondsExercise] = useState(20)
 	const [isExercise, setIsExercise] = useState(false);
 
-	const [secondsRest, setSecondsRest] = useState(5)
+	const [secondsRest, setSecondsRest] = useState(10)
 	const [isRest, setIsRest] = useState(true);
 
 	const [seconds, setSeconds] = useState(0);
