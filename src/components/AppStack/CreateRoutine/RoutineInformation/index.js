@@ -100,7 +100,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 					transparent={true}
 					visible={modalVisible}
 					onRequestClose={() => {
-						Alert.alert('Modal has been closed.');
+						console.log("Modal cerrado");
 					}}>
 					<BackgroundContainer3>
 						<View {...theme.Container}>
