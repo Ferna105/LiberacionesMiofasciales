@@ -142,7 +142,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 					</Text>
 					<TouchableOpacity style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }}
 						onPress={() => onPressStart()} >
-						<Text {...theme.TouchableOpacityText}>COMENZAR</Text>
+						<Text {...theme.TouchableOpacityText}>SIGUIENTE</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
