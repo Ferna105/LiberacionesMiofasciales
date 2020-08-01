@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
-import { getExercises } from '@theme/queries';
+import { getShowableExercises } from '@theme/queries';
 import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 const windowWidth = Dimensions.get('window').width;
@@ -25,7 +25,7 @@ const Explore = ({ theme, navigation }) => {
 	const [selectedExerciseModal, setSelectedExerciseModal] = useState({});
 
 	useEffect(() => {
-		var exercises = getExercises();
+		var exercises = getShowableExercises();
 		setExecises(exercises);
 	}, []);
 
@@ -39,7 +39,7 @@ const Explore = ({ theme, navigation }) => {
 			<TouchableOpacity onPress={() => openExerciseInModal(exercise)}>
 				<View {...theme.FlatListItem} key={key}>
 					<View style={{ flex: 2 }}>
-						<Text {...theme.Text}>{exercise.name}</Text>
+						<Text {...theme.Text}>{exercise.showableName}</Text>
 					</View>
 					<View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
 						<Ionicons size={20} color="rgb(65,189,252)" name="ios-search" />
@@ -83,7 +83,7 @@ const Explore = ({ theme, navigation }) => {
 										selectedExerciseModal && (
 											<View>
 												<View style={{ paddingHorizontal: 20 }}>
-													<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21, marginBottom: 10 }}>{selectedExerciseModal.name}</Text>
+													<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21, marginBottom: 10 }}>{selectedExerciseModal.showableName}</Text>
 												</View>
 												<Video
 													source={selectedExerciseModal.gif}

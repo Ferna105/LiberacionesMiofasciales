@@ -40,6 +40,11 @@ export const getExercises = () => {
 	return exercises;	
 }
 
+export const getShowableExercises = () => {
+	var {exercises} = database.tables;
+	return exercises.filter(er => er.showable);	
+}
+
 export const getChains = () => {
 
 	var {chains} = database.tables;
@@ -95,4 +100,41 @@ export const getGeneratedRoutine = (userSelection) => {
 
 	return exercisesList;
 
+}
+
+export const getGeneratedRoutineShowableExercises = (userSelection) => {
+	var exercisesList = Array();
+	userSelection.routines.map((sr,key) => {
+		if(sr.selected) {
+			var r = getRoutineByRid(sr.rid);
+			for (var i = 0; i < sr.level; i++) {
+				r.exercises.map((ex,keyex) => {
+					exercisesList = exercisesList.concat(ex.data);
+				});
+			}
+		}
+
+	})
+
+	if(userSelection.chains){
+		userSelection.chains.map((ch,key) => {
+			if(ch.selected){
+				var c = getExerciseByCid(ch.cid);
+				for (var i = 0; i < ch.level; i++) {
+					exercisesList = exercisesList.concat(c);
+				}
+			}
+		})
+	}
+
+	const filteredExercises = exercisesList.reduce((acc, current) => {
+		const x = acc.find(item => item.eid === current.eid);
+		if (!x) {
+		  return acc.concat([current]);
+		} else {
+		  return acc;
+		}
+	}, []);
+
+	return filteredExercises.filter(er => er.showable);
 }

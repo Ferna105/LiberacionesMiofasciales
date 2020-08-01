@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
-import { getGeneratedRoutine } from '@theme/queries';
+import { getGeneratedRoutine, getGeneratedRoutineShowableExercises } from '@theme/queries';
 import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 const windowWidth = Dimensions.get('window').width;
@@ -21,10 +21,16 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 
 
 	const [routine, setRoutine] = useState([]);
+	const [showableExercises, setShowableExercises] = useState([]);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [selectedExerciseModal, setSelectedExerciseModal] = useState({});
 
 	useEffect(() => {
+		//Ejercicios que se muestran
+		var generatedRoutineShowableExercises = getGeneratedRoutineShowableExercises(route.params);
+		setShowableExercises(generatedRoutineShowableExercises);
+
+		//Secuencia de ejercicios de la rutina
 		var generatedRoutine = getGeneratedRoutine(route.params);
 		setRoutine(generatedRoutine);
 	}, []);
@@ -54,7 +60,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 			<TouchableOpacity onPress={() => openExerciseInModal(exercise)}>
 				<View {...theme.FlatListItem} key={key}>
 					<View style={{ flex: 2 }}>
-						<Text {...theme.Text}>{exercise.name}</Text>
+						<Text {...theme.Text}>{exercise.showableName}</Text>
 					</View>
 					<View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
 						<Ionicons size={20} color="rgb(65,189,252)" name="ios-search" />
@@ -80,10 +86,10 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 		  		</Text>
 				</View>
 				{
-					routine.length ? (
+					showableExercises.length ? (
 						<FlatList
 							style={{ marginVertical: 10, width: "100%" }}
-							data={routine}
+							data={showableExercises}
 							renderItem={({ item, index }) => renderExercisesList(item, index)}
 							keyExtractor={(item, index) => index.toString()}
 						/>
@@ -104,7 +110,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 										selectedExerciseModal && (
 											<View>
 												<View style={{ paddingHorizontal: 20 }}>
-													<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21, marginBottom: 10 }}>{selectedExerciseModal.name}</Text>
+													<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21, marginBottom: 10 }}>{selectedExerciseModal.showableName}</Text>
 												</View>
 												<Video
 													source={selectedExerciseModal.gif}
