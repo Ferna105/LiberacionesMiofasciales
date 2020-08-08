@@ -16,7 +16,7 @@ const SplashScreen = ({theme}) => {
 			<BackgroundContainer3>
 				<View style={{ padding: 30, flex: 1 }}>
 					<View style={{ alignItems: 'center', justifyContent: 'center', flex: 2 }}>
-						<Image style={{ resizeMode: 'stretch', width: 150, height: 150 }} source={require('@assets/images/splash.png')} />
+						<Image style={{ resizeMode: 'stretch', width: 150, height: 150 }} source={require('@assets/images/logo.png')} />
 						<View style={{marginTop: 40}}>
 							<ActivityIndicator {...theme.ActivityIndicator}/>
 						</View>
