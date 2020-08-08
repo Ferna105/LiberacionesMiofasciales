@@ -18,6 +18,7 @@ const windowWidth = Dimensions.get('window').width;
 const StartRoutine = ({ theme, navigation, route }) => {
 
 	var _videoRef;
+	var playbackInstance;
 
 	const [secondsExercise, setSecondsExercise] = useState(20)
 	const [isExercise, setIsExercise] = useState(false);
@@ -41,6 +42,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 			isLooping: true,
 			shouldPlay: true
 		})
+
 	}, [currentExercise]);
 
 	useEffect(() => {
@@ -104,7 +106,30 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	}
 
 	const playStartSound = async () => {
-		//playStartSound.playAsync();
+		_loadNewPlaybackInstance(true);
+	}
+
+	const _loadNewPlaybackInstance = async (playing) => {
+		if (playbackInstance != null) {
+			await playbackInstance.unloadAsync();
+			playbackInstance.setOnPlaybackStatusUpdate(null);
+			playbackInstance = null;
+		 }
+		 const source = require('@assets/sounds/hit.mp3');
+		 const initialStatus = {
+			  shouldPlay: true,
+			  rate: 1.0,
+			  shouldCorrectPitch: true,
+			  volume: 1.0,
+			  isMuted: false
+		 };
+		 const { sound, status } = await Audio.Sound.createAsync(
+			 source,
+			 initialStatus
+		);
+		playbackInstance = sound;
+		playbackInstance.setIsLoopingAsync(false);
+		playbackInstance.playAsync();
 	}
 
 	const pauseRoutine = () => {
