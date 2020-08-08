@@ -47,7 +47,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 	const onPressStart = () => {
 		Alert.alert(
 			"Alerta",
-			"En la elongación se debe sentir tención, no dolor.",
+			"En la elongación se debe sentir tensión, no dolor.",
 			[
 				{ text: "Entendido", onPress: () => navigation.navigate('StartRoutine', { routine }) }
 			],
@@ -122,7 +122,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 													isLooping
 													style={{ width: windowWidth, height: 300, marginBottom: 20 }}
 												/>
-												<ScrollView>
+												<ScrollView style={{padding: 5}}>
 													<Text style={{ textAlign: 'center', color: "#e5dfdf", fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10, marginHorizontal: 10 }}>
 														{selectedExerciseModal.description}
 													</Text>

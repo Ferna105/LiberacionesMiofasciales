@@ -110,6 +110,11 @@ const LevelSelection = ({ navigation, theme }) => {
 						<Text style={{color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 17}}>Tiempo total: </Text> 
 						<Text style={{color: "#e5dfdf", fontSize: 17, fontWeight:'bold'}}>{calculateTotal()}'</Text>
 			  		</Text>
+					<Text style={{marginBottom: 10,textAlign: 'center', borderColor: 'rgb(65,189,252)', borderWidth: 1, padding: 5 }}>
+						<Text style={{color: "rgb(65,189,252)", fontFamily: 'Raleway-Regular', fontSize: 17}}>
+							VAS A NECESITAR UNA SILLA, UNA SOGA Y UN BASTÓN.
+						</Text> 
+			  		</Text>
 					<TouchableOpacity style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }}
 						onPress={() => navigation.navigate('AddAccessory', { routines })} >
 						<Text {...theme.TouchableOpacityText}>Siguiente</Text>

@@ -11,7 +11,7 @@ import {
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 import { Ionicons } from '@expo/vector-icons';
 
-import { getChains } from '@theme/queries';
+import { getChains, getExerciseByCid } from '@theme/queries';
 import { withTheme } from '@theme/themeProvider';
 const windowWidth = Dimensions.get('window').width;
 
@@ -34,6 +34,11 @@ const AccessoryExercises = ({ navigation, theme, route }) => {
 		setChains(chains);
 	}, []);
 
+	const calculateTime = (chain, level) => {
+		var chainExercises = getExerciseByCid(chain.cid);
+		var chainSeconds = level * (chainExercises.length * 20 + chainExercises.length * 10);
+		return Math.trunc(chainSeconds / 60);
+	}
 
 	const updateSelectedChains = (key) => {
 		let newSelectedChains = [...chains];
@@ -44,21 +49,21 @@ const AccessoryExercises = ({ navigation, theme, route }) => {
 				"El nivel depende de la cantidad de repeticiones",
 				[
 					{
-						text: "Nivel 1",
+						text: `Nivel 1 |${calculateTime(newSelectedChains[key], 1)}'|`,
 						onPress: () => {
 							newSelectedChains[key].level = 1;
 							setChains(newSelectedChains);
 						}
 					},
 					{
-						text: "Nivel 2",
+						text: `Nivel 2 |${calculateTime(newSelectedChains[key], 2)}'|`,
 						onPress: () => {
 							newSelectedChains[key].level = 2;
 							setChains(newSelectedChains);
 						}
 					},
 					{ 
-						text: "Nivel 3", 
+						text: `Nivel 3 |${calculateTime(newSelectedChains[key], 3)}'|`, 
 						onPress: () => {
 							newSelectedChains[key].level = 3;
 							setChains(newSelectedChains);
