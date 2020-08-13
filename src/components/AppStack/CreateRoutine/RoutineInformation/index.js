@@ -82,19 +82,27 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 				<View>
 					<Text style={{ textAlign: 'center', color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 17, marginBottom: 10 }}>Listado de ejercicios</Text>
 					<Text style={{ textAlign: 'center', color: "#e5dfdf", fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10 }}>
-						A continuación se muestran todos los ejercicios de la rutiina. Si desconoce como es cada uno puede ver el video de explicación.
-		  		</Text>
+						A continuación se muestran todos los ejercicios de la rutina. Si desconoce como es cada uno puede ver el video de explicación.
+		  			</Text>
 				</View>
-				{
-					showableExercises.length ? (
-						<FlatList
-							style={{ marginVertical: 10, width: "100%" }}
-							data={showableExercises}
-							renderItem={({ item, index }) => renderExercisesList(item, index)}
-							keyExtractor={(item, index) => index.toString()}
-						/>
-					) : null
-				}
+				<FlatList
+					style={{ marginVertical: 10, width: "100%" }}
+					data={Object.keys(showableExercises)}
+					renderItem={({ item, index }) => {
+						return (
+							<View >
+								<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 15 }}>{item}</Text>
+								<FlatList
+									style={{ marginVertical: 10, width: "100%" }}
+									data={showableExercises[item]}
+									renderItem={({ item, index }) => renderExercisesList(item, index)}
+									keyExtractor={(item, index) => index.toString()}
+								/>
+							</View>
+						)
+					}}
+					keyExtractor={(item, index) => index.toString()}
+				/>
 				<Modal
 					animationType="slide"
 					transparent={true}
@@ -122,7 +130,7 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 													isLooping
 													style={{ width: windowWidth, height: 300, marginBottom: 20 }}
 												/>
-												<ScrollView style={{padding: 5}}>
+												<ScrollView style={{ padding: 5 }}>
 													<Text style={{ textAlign: 'center', color: "#e5dfdf", fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10, marginHorizontal: 10 }}>
 														{selectedExerciseModal.description}
 													</Text>
@@ -141,10 +149,10 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 					</View>
 				</Modal>
 
-				<View style={{width: "100%"}}>
-					<Text style={{textAlign: 'right'}}>
-						<Text style={{fontSize: 17, fontFamily: 'Raleway-Bold', color: 'white'}}>Tiempo total: </Text>
-						<Text style={{fontSize: 17,color: 'white',fontWeight:'bold'}}>{getTotalTime()}'</Text>
+				<View style={{ width: "100%" }}>
+					<Text style={{ textAlign: 'right' }}>
+						<Text style={{ fontSize: 17, fontFamily: 'Raleway-Bold', color: 'white' }}>Tiempo total: </Text>
+						<Text style={{ fontSize: 17, color: 'white', fontWeight: 'bold' }}>{getTotalTime()}'</Text>
 					</Text>
 					<TouchableOpacity style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }}
 						onPress={() => onPressStart()} >

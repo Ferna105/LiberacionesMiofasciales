@@ -109,25 +109,33 @@ export const getGeneratedRoutineShowableExercises = (userSelection) => {
 			var r = getRoutineByRid(sr.rid);
 			for (var i = 0; i < sr.level; i++) {
 				r.exercises.map((ex,keyex) => {
+					ex.data.rid = r.rid;
+					ex.data.group_name = r.name;
 					exercisesList = exercisesList.concat(ex.data);
 				});
 			}
 		}
 
 	})
+	
 
 	if(userSelection.chains){
 		userSelection.chains.map((ch,key) => {
 			if(ch.selected){
 				var c = getExerciseByCid(ch.cid);
 				for (var i = 0; i < ch.level; i++) {
+					for (let index = 0; index < c.length; index++) {
+						const element = c[index];
+						element.rid = 0;
+						element.group_name = "Accesorios";
+					}
 					exercisesList = exercisesList.concat(c);
 				}
 			}
 		})
 	}
-
-	const filteredExercises = exercisesList.reduce((acc, current) => {
+	
+	var filteredExercises = exercisesList.reduce((acc, current) => {
 		const x = acc.find(item => item.eid === current.eid);
 		if (!x) {
 		  return acc.concat([current]);
@@ -136,5 +144,19 @@ export const getGeneratedRoutineShowableExercises = (userSelection) => {
 		}
 	}, []);
 
-	return filteredExercises.filter(er => er.showable);
+	var groupedExercises = Array();
+
+	filteredExercises = filteredExercises.filter(er => er.showable);
+
+	for (let index = 0; index < filteredExercises.length; index++) {
+		const exercise = filteredExercises[index];
+
+		
+		if (!groupedExercises[exercise.group_name]) {
+			groupedExercises[exercise.group_name] = Array();
+		}
+		groupedExercises[exercise.group_name].push(exercise);
+	}
+
+	return groupedExercises;
 }

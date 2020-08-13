@@ -18,7 +18,7 @@ const windowWidth = Dimensions.get('window').width;
 const StartRoutine = ({ theme, navigation, route }) => {
 
 	var _videoRef;
-	var playbackInstance;
+	const [playbackInstance, setPlaybackInstance] = useState(null);
 
 	const [secondsExercise, setSecondsExercise] = useState(20)
 	const [isExercise, setIsExercise] = useState(false);
@@ -35,6 +35,13 @@ const StartRoutine = ({ theme, navigation, route }) => {
 
 	useEffect(() => {
 		navigation.setOptions({ title: 'Tiempo total: ' + seconds.toHHMMSS() })
+
+		if ([3, 2, 1].includes(secondsRest)) {
+			playStartSound();
+		}
+		if ([1].includes(secondsExercise)) {
+			playStartSound();
+		}
 	}, [seconds]);
 
 	useEffect(() => {
@@ -42,7 +49,6 @@ const StartRoutine = ({ theme, navigation, route }) => {
 			isLooping: true,
 			shouldPlay: true
 		})
-
 	}, [currentExercise]);
 
 	useEffect(() => {
@@ -74,10 +80,8 @@ const StartRoutine = ({ theme, navigation, route }) => {
 				if (isRest) {
 
 					setSecondsRest(secondsRest => secondsRest - 1);
-					//if(secondsRest != 0) playRestSound();
 
 					if (secondsRest == 0) {
-						playStartSound();
 						changePoint();
 					}
 				}
@@ -110,26 +114,28 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	}
 
 	const _loadNewPlaybackInstance = async (playing) => {
-		if (playbackInstance != null) {
-			await playbackInstance.unloadAsync();
-			playbackInstance.setOnPlaybackStatusUpdate(null);
-			playbackInstance = null;
-		 }
-		 const source = require('@assets/sounds/hit.mp3');
-		 const initialStatus = {
-			  shouldPlay: true,
-			  rate: 1.0,
-			  shouldCorrectPitch: true,
-			  volume: 1.0,
-			  isMuted: false
-		 };
-		 const { sound, status } = await Audio.Sound.createAsync(
-			 source,
-			 initialStatus
+		var instance = playbackInstance;
+		if (instance != null) {
+			await instance.unloadAsync();
+			instance.setOnPlaybackStatusUpdate(null);
+			instance = null;
+		}
+		const source = require('@assets/sounds/SD_NAVIGATE_39.mp3');
+		const initialStatus = {
+			shouldPlay: true,
+			rate: 1.0,
+			shouldCorrectPitch: true,
+			volume: 1.0,
+			isMuted: false
+		};
+		const { sound, status } = await Audio.Sound.createAsync(
+			source,
+			initialStatus
 		);
-		playbackInstance = sound;
-		playbackInstance.setIsLoopingAsync(false);
-		playbackInstance.playAsync();
+		instance = sound;
+		instance.setIsLoopingAsync(false);
+		instance.playAsync();
+		setPlaybackInstance(instance);
 	}
 
 	const pauseRoutine = () => {
@@ -161,11 +167,11 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	return (
 		<BackgroundContainer3>
 			<View {...theme.Container}>
-				<View style={{ flex: 2 }}>
+				<View style={{ flex: 4 }}>
 					<View style={{ flex: 1 }}>
 						<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 19, textAlign: "center" }}>{route.params.routine[currentExercise].name}</Text>
 					</View>
-					<View style={{ flex: 5 }}>
+					<View style={{ flex: 7 }}>
 						<TouchableOpacity onPress={() => _videoRef.presentFullscreenPlayer()}>
 							<Video
 								resizeMode={Video.RESIZE_MODE_COVER}
@@ -180,7 +186,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 				</View>
 				<View style={{ flex: 1 }}>
 					<View style={{ flexDirection: 'row', justifyContent: 'center' }} >
-						<View>
+						<View style={{ marginHorizontal: 10 }}>
 							{isRest ?
 								<Text style={{ textAlign: 'center' }}  >
 									<MaterialCommunityIcons name="progress-clock" size={55} color="white" />
@@ -196,21 +202,21 @@ const StartRoutine = ({ theme, navigation, route }) => {
 								</Text>
 							}
 						</View>
+						<View style={{ flexDirection: "row", justifyContent: 'center', marginHorizontal: 10 }}>
+							<TouchableOpacity style={{ margin: 5, elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 40, borderRadius: 5, alignItems: "center", marginVertical: 10 }}
+								onPress={() => pauseRoutine()} >
+								<Text {...theme.TouchableOpacityText}>{isActive ? "Pausar" : "Comenzar"}</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
-					<View style={{ flexDirection: "row", justifyContent: 'center' }}>
-						<TouchableOpacity style={{ margin: 5, elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 40, borderRadius: 5, alignItems: "center", marginVertical: 10 }}
-							onPress={() => pauseRoutine()} >
-							<Text {...theme.TouchableOpacityText}>{isActive ? "Pausar" : "Comenzar"}</Text>
-						</TouchableOpacity>
+					<View >
+						<ProgressBarAndroid
+							{...theme.ProgressBarAndroid}
+							styleAttr="Horizontal"
+							indeterminate={false}
+							progress={calculateProgress()}
+						/>
 					</View>
-				</View>
-				<View >
-					<ProgressBarAndroid
-						{...theme.ProgressBarAndroid}
-						styleAttr="Horizontal"
-						indeterminate={false}
-						progress={calculateProgress()}
-					/>
 				</View>
 			</View>
 		</BackgroundContainer3>
