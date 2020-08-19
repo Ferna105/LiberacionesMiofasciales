@@ -23,7 +23,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	const [secondsExercise, setSecondsExercise] = useState(20)
 	const [isExercise, setIsExercise] = useState(false);
 
-	const [secondsRest, setSecondsRest] = useState(10)
+	const [secondsRest, setSecondsRest] = useState(5)
 	const [isRest, setIsRest] = useState(true);
 
 	const [seconds, setSeconds] = useState(0);
@@ -120,7 +120,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 			instance.setOnPlaybackStatusUpdate(null);
 			instance = null;
 		}
-		const source = require('@assets/sounds/SD_NAVIGATE_39.mp3');
+		const source = require('@assets/sounds/bip.mp3');
 		const initialStatus = {
 			shouldPlay: true,
 			rate: 1.0,
@@ -145,8 +145,8 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	const changePoint = () => {
 		setIsRest(!isRest);
 		setIsExercise(!isExercise);
-		setSecondsRest(5);
-		setSecondsExercise(10);
+		setSecondsRest(10);
+		setSecondsExercise(20);
 		isExercise ? changeExercise() : null;
 	}
 
@@ -165,7 +165,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	}
 
 	return (
-		<BackgroundContainer3>
+		<BackgroundContainer3 error={isRest} success={isExercise} >
 			<View {...theme.Container}>
 				<View style={{ flex: 4 }}>
 					<View style={{ flex: 1 }}>

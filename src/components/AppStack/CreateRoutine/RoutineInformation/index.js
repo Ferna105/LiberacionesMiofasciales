@@ -46,8 +46,8 @@ const RoutineInformation = ({ theme, navigation, route }) => {
 
 	const onPressStart = () => {
 		Alert.alert(
-			"Alerta",
-			"En la elongación se debe sentir tensión, no dolor.",
+			"Importante",
+			`En la elongación se debe sentir tensión, no dolor.\n\nCada ejercicio consta de 20 segundos de elongación (Reloj en verde) por 10 de descanso (Reloj en rojo).\n\nEl punto rojo de cada video indica la postura en la que debe permanecer quieto.`,
 			[
 				{ text: "Entendido", onPress: () => navigation.navigate('StartRoutine', { routine }) }
 			],
