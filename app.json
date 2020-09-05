@@ -1,31 +1,21 @@
 {
   "expo": {
     "name": "Liberación Miofacial",
-    "slug": "LiberacionMiofacial",
-    "privacy": "public",
-    "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "version": "1.0.0",
+    "slug": "LiberacionMiofacial",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.liberacionesmiofaciales.liberacionesmiofaciales",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.liberacionesmiofaciales.liberacionesmiofaciales",
+      "versionCode": 1
     }
   }
 }
