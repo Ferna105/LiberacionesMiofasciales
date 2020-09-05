@@ -11,7 +11,7 @@ import { Audio } from 'expo-av';
 import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -52,62 +52,35 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	}, [currentExercise]);
 
 	useEffect(() => {
+		activateKeepAwake();
 
-
-		let interval = null;
 		let totalInterval = null;
-		let exerciseIterval = null;
-		let restInterval = null;
-
 		totalInterval = setTimeout(() => {
 			setTotalSeconds(totalSeconds => totalSeconds + 1)
-
-
-
-
 			if (isActive) {
-
 				setSeconds(seconds => seconds + 1);
-
 				if (isExercise) {
 					setSecondsExercise(secondsExercise => secondsExercise - 1);
-
 					if (secondsExercise == 0) {
 						changePoint();
 					}
 				}
-
 				if (isRest) {
-
 					setSecondsRest(secondsRest => secondsRest - 1);
-
 					if (secondsRest == 0) {
 						changePoint();
 					}
 				}
-
-
 			}
-
-
-
-
-
-
 		}, 1000);
-
-
 
 		return () => {
 			clearTimeout(totalInterval);
+			deactivateKeepAwake();
 		};
 
 	});
 
-
-	const playRestSound = () => {
-		//restSound.playAsync();
-	}
 
 	const playStartSound = async () => {
 		_loadNewPlaybackInstance(true);
