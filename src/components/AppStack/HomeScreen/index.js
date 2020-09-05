@@ -185,9 +185,9 @@ const HomeScreen = ({ navigation, theme }) => {
 		<BackgroundContainer3>
 			<View style={{ flex: 1 }}>	
 				<View style={{ flex: 2, flexDirection: 'row' }}>
-					<View style={{height: "100%", justifyContent: 'center', alignItems: 'center', marginLeft: 20}}>
+					<TouchableOpacity onPress={() => carousel.snapToItem(activeSlide - 1)} style={{height: "100%", justifyContent: 'center', alignItems: 'center', marginLeft: 20}}>
 						<AntDesign size={30} style={{color: "white"}} name="leftcircleo" />
-					</View>
+					</TouchableOpacity>
 					<Carousel
 						style={{height: "100%"}}
 						ref={(c) => { carousel = c; }}
@@ -197,9 +197,9 @@ const HomeScreen = ({ navigation, theme }) => {
 						onSnapToItem={(index) => setActiveSlide(index) }
 						itemWidth={screenWidth - 100}
 					/>
-					<View style={{height: "100%", justifyContent: 'center', alignItems: 'center', marginRight: 20}}>
+					<TouchableOpacity onPress={() => carousel.snapToItem(activeSlide + 1)} style={{height: "100%", justifyContent: 'center', alignItems: 'center', marginRight: 20}}>
 						<AntDesign size={30} style={{color: "white"}} name="rightcircleo" />
-					</View>
+					</TouchableOpacity>
 				</View>
 				<View style={{ flex: 1 }}>
 					<View style={{ flex: 1, flexDirection: 'row' }}>
