@@ -68,14 +68,13 @@ const LevelSelection = ({ navigation, theme }) => {
 					<ScrollView>
 						{
 							routines.map((routine, key) => {
-								var disabled = routine.type == 'general' ? true : false;
 								var time = routine.exercisesLength * 20 + routine.exercisesLength * 10;
 								var level1 = `Nivel 1 (${Math.trunc(time / 60)}')`;
 								var level2 = `Nivel 2 (${Math.trunc(time * 2 / 60)}')`;
 								var level3 = `Nivel 3 (${Math.trunc(time * 3 / 60)}')`;
 								return (
 									<View key={key} style={{ flexDirection: 'row' }}>
-										<View style={{ flex: 3 }}>
+										<View style={{ flex: 1 }}>
 											<CheckBox
 												{...theme.CheckBox}
 												textStyle={{
@@ -83,16 +82,16 @@ const LevelSelection = ({ navigation, theme }) => {
 													fontWeight: '100',
 												}}
 												checked={routine.selected}
-												disabled={disabled}
+												disabled={false}
 												title={routine.name}
 												onPress={() => updateSelectedRoutines(key)}
 											/>
 										</View>
-										<View style={{ flex: 2 }}>
+										<View style={{ flex: 1 }}>
 											<Picker
 												selectedValue={routine.level}
 												onValueChange={(itemValue, itemIndex) => updateLevelRoutines(key, itemValue)}
-												{...theme.Picker}
+												style={{height: 50,marginHorizontal: 5, color: 'white'}}
 											>
 												<Picker.Item label={level1} value="1" />
 												<Picker.Item label={level2} value="2" />
@@ -112,10 +111,12 @@ const LevelSelection = ({ navigation, theme }) => {
 			  		</Text>
 					<Text style={{marginBottom: 10,textAlign: 'center', borderColor: 'rgb(65,189,252)', borderWidth: 1, padding: 5, borderRadius: 5 }}>
 						<Text style={{color: "rgb(65,189,252)", fontFamily: 'Raleway-Regular', fontSize: 17}}>
-							VAS A NECESITAR UNA SILLA, UNA SOGA Y UN BASTÓN.
+							VAS A NECESITAR UNA SILLA, UNA SOGA, UN BASTÓN Y UN LIBRO GRUESO PARA PISAR.
 						</Text> 
 			  		</Text>
-					<TouchableOpacity style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }}
+					<TouchableOpacity disabled={calculateTotal() == 0} 
+						style={[calculateTotal() == 0 ? { backgroundColor: "rgba(65,189,252,.5)"}:{ backgroundColor: "rgb(65,189,252)" },
+						{elevation: 5,paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10}]}
 						onPress={() => navigation.navigate('AddAccessory', { routines })} >
 						<Text {...theme.TouchableOpacityText}>Siguiente</Text>
 					</TouchableOpacity>

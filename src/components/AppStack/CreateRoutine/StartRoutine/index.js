@@ -39,7 +39,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 		if ([3, 2, 1].includes(secondsRest)) {
 			playStartSound();
 		}
-		if ([1].includes(secondsExercise)) {
+		if ([3,2,1].includes(secondsExercise)) {
 			playStartSound();
 		}
 	}, [seconds]);
@@ -172,7 +172,6 @@ const StartRoutine = ({ theme, navigation, route }) => {
 						<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 19, textAlign: "center" }}>{route.params.routine[currentExercise].name}</Text>
 					</View>
 					<View style={{ flex: 7 }}>
-						<TouchableOpacity onPress={() => _videoRef.presentFullscreenPlayer()}>
 							<Video
 								resizeMode={Video.RESIZE_MODE_COVER}
 								isMuted={true}
@@ -181,7 +180,6 @@ const StartRoutine = ({ theme, navigation, route }) => {
 								style={{ width: windowWidth, height: "100%" }}
 							/>
 
-						</TouchableOpacity>
 					</View>
 				</View>
 				<View style={{ flex: 1 }}>
