@@ -4,7 +4,8 @@ import {
 	View,
 	TouchableOpacity,
 	ProgressBarAndroid,
-	Dimensions
+	Dimensions,
+	Alert
 } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Audio } from 'expo-av';
@@ -81,6 +82,20 @@ const StartRoutine = ({ theme, navigation, route }) => {
 
 	});
 
+	const [text, setText] = React.useState('');
+	const hasUnsavedChanges = Boolean(text);
+
+	React.useEffect(() =>
+		navigation.addListener('beforeRemove', (e) => {
+			e.preventDefault();
+
+			Alert.alert('Salir de la rutina','¿Estás seguro que deseás salir de la rutina actual?',
+			[
+				{ text: "No", style: 'cancel', onPress: () => {} },
+				{ text: 'Si, estoy seguro', style: 'destructive', onPress: () => navigation.dispatch(e.data.action)}
+			]
+		);
+	}),	[navigation]);
 
 	const playStartSound = async () => {
 		_loadNewPlaybackInstance(true);
