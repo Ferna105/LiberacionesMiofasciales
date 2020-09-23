@@ -46,10 +46,12 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	}, [seconds]);
 
 	useEffect(() => {
-		_videoRef.loadAsync(route.params.routine[currentExercise].gif, {
-			isLooping: true,
-			shouldPlay: true
-		})
+		if(_videoRef) {
+			_videoRef.loadAsync(route.params.routine[currentExercise].gif, {
+				isLooping: true,
+				shouldPlay: true
+			})
+		}
 	}, [currentExercise]);
 
 	useEffect(() => {
@@ -160,13 +162,13 @@ const StartRoutine = ({ theme, navigation, route }) => {
 						<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 19, textAlign: "center" }}>{route.params.routine[currentExercise].name}</Text>
 					</View>
 					<View style={{ flex: 7 }}>
-							<Video
-								resizeMode={Video.RESIZE_MODE_COVER}
-								isMuted={true}
-								ref={(ref) => (_videoRef = ref)}
-								useNativeControls={false}
-								style={{ width: windowWidth, height: "100%" }}
-							/>
+						<Video
+							resizeMode={Video.RESIZE_MODE_COVER}
+							isMuted={true}
+							ref={(ref) => (_videoRef = ref)}
+							useNativeControls={false}
+							style={{ width: windowWidth, height: "100%" }}
+						/>
 
 					</View>
 				</View>
