@@ -73,9 +73,9 @@ const Explore = ({ theme, navigation }) => {
 					transparent={true}
 					visible={modalVisible}
 					onRequestClose={() => {
-						Alert.alert('Modal has been closed.');
+						setModalVisible(false)
 					}}>
-					<BackgroundContainer3>
+					<BackgroundContainer3 hasMarginTop={false}>
 						<View {...theme.Container}>
 							<View>
 								<View style={{ alignItems: 'center', marginBottom: 10 }}>
@@ -106,12 +106,12 @@ const Explore = ({ theme, navigation }) => {
 								</View>
 							</View>
 						</View>
+						<View style={{ padding: 20 }}>
+							<TouchableOpacity activeOpacity={1} style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }} onPress={() => { setModalVisible(!modalVisible); }}>
+								<Text {...theme.TouchableOpacityText}>Cerrar</Text>
+							</TouchableOpacity>
+						</View>
 					</BackgroundContainer3>
-					<View style={{ padding: 20 }}>
-						<TouchableOpacity activeOpacity={1} style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }} onPress={() => { setModalVisible(!modalVisible); }}>
-							<Text {...theme.TouchableOpacityText}>Cerrar</Text>
-						</TouchableOpacity>
-					</View>
 				</Modal>
 
 				<View style={{width: "100%"}}>

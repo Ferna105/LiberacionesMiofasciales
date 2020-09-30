@@ -29,7 +29,7 @@
       style: {
         backgroundColor: "transparent",
         elevation: 0, // remove shadow on Android
-          shadowOpacity: 0, // remove shadow on iOS
+        shadowOpacity: 0, // remove shadow on iOS
       },
       tintColor: "#e5dfdf",
       titleStyle: {

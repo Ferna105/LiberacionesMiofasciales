@@ -19,9 +19,12 @@ const windowWidth = Dimensions.get('window').width;
 const StartRoutine = ({ theme, navigation, route }) => {
 
 	var _videoRef;
+	const exerciseTime = 20;
+	const restTime = 10;
+
 	const [playbackInstance, setPlaybackInstance] = useState(null);
 
-	const [secondsExercise, setSecondsExercise] = useState(20)
+	const [secondsExercise, setSecondsExercise] = useState(exerciseTime)
 	const [isExercise, setIsExercise] = useState(false);
 
 	const [secondsRest, setSecondsRest] = useState(5)
@@ -44,15 +47,6 @@ const StartRoutine = ({ theme, navigation, route }) => {
 			playStartSound();
 		}
 	}, [seconds]);
-
-	useEffect(() => {
-		if(_videoRef) {
-			_videoRef.loadAsync(route.params.routine[currentExercise].gif, {
-				isLooping: true,
-				shouldPlay: true
-			})
-		}
-	}, [currentExercise]);
 
 	useEffect(() => {
 		activateKeepAwake();
@@ -135,8 +129,8 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	const changePoint = () => {
 		setIsRest(!isRest);
 		setIsExercise(!isExercise);
-		setSecondsRest(10);
-		setSecondsExercise(20);
+		setSecondsRest(restTime);
+		setSecondsExercise(exerciseTime);
 		isExercise ? changeExercise() : null;
 	}
 
@@ -154,6 +148,14 @@ const StartRoutine = ({ theme, navigation, route }) => {
 		return (currentExercise / route.params.routine.length)
 	}
 
+	const _handleVideoRef = component => {
+		const playbackObject = component;
+		if(playbackObject){
+			//console.log(playbackObject.error);
+
+		}
+	}
+
 	return (
 		<BackgroundContainer3 error={isRest} success={isExercise} >
 			<View {...theme.Container}>
@@ -165,7 +167,10 @@ const StartRoutine = ({ theme, navigation, route }) => {
 						<Video
 							resizeMode={Video.RESIZE_MODE_COVER}
 							isMuted={true}
-							ref={(ref) => (_videoRef = ref)}
+							isLooping= {true}
+							shouldPlay= {true}
+							source={route.params.routine[currentExercise].gif}
+							ref={(ref) => _handleVideoRef(ref)}
 							useNativeControls={false}
 							style={{ width: windowWidth, height: "100%" }}
 						/>

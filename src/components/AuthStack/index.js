@@ -18,6 +18,7 @@ const AuthStack = ({theme}) => {
         headerStyle: theme.Header.style,
         headerTintColor: theme.Header.tintColor,
         headerTitleStyle: theme.Header.titleStyle,
+        headerTransparent: true,
         ...TransitionPresets.SlideFromRightIOS,
       }}
       headerMode="screen"
