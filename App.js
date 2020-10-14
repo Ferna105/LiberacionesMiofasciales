@@ -8,6 +8,8 @@ import { ThemeContextProvider } from './src/core/themeProvider';
 import * as Font from 'expo-font';
 import { AuthContext } from '@components/context';
 import { AsyncStorage } from 'react-native';
+import {getExercises,getChains} from '@theme/queries';
+import { Asset } from 'expo-asset';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,47 @@ export default function App() {
     }
   }, [])
 
+  function cacheChains() {
+    var chains = getChains();
+    return chains.map(chain => {
+      return Asset.fromModule(chain.image).downloadAsync();
+    });
+  }
+
+  function cacheExercises() {
+    var exercises = getExercises();
+    return exercises.map(exercise => {
+      return Asset.fromModule(exercise.gif).downloadAsync();
+    });
+
+  }
+
+  function cacheAssets() {
+    var sliders = [
+      require('@assets/slider/slider0.png'),
+      require('@assets/slider/slider1.png'),
+      require('@assets/slider/slider2.png'),
+      require('@assets/slider/slider3.png'),
+      require('@assets/slider/slider4.png'),
+      require('@assets/slider/slider5.png'),
+      require('@assets/slider/slider6.png'),
+      require('@assets/slider/slider7.png'),
+      require('@assets/slider/slider8.png'),
+      require('@assets/slider/slider9.png'),
+      require('@assets/slider/slider10.png'),
+      require('@assets/slider/slider11.png'),
+      require('@assets/slider/slider12.png'),
+      require('@assets/slider/slider13.png'),
+      require('@assets/slider/slider14.png'),
+      require('@assets/slider/slider15.png')
+    ];
+
+    return sliders.map(slider => {
+      return Asset.fromModule(slider).downloadAsync();
+    });
+
+  }
+
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
@@ -45,6 +88,12 @@ export default function App() {
           'Raleway-Italic': require('./assets/fonts/Raleway-Italic.ttf'),
           'Raleway-Light': require('./assets/fonts/Raleway-Light.ttf'),
         });
+
+        const imageAssets = cacheAssets();
+        const chainsAssets = cacheChains();
+        const exercisesAssets = cacheExercises();
+
+        await Promise.all([...imageAssets,...chainsAssets,...exercisesAssets]);
 
         storedProfile = await AsyncStorage.getItem('@profile');
         setProfile(JSON.parse(storedProfile));
