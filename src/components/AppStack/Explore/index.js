@@ -13,7 +13,6 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
 import { getShowableExercises } from '@theme/queries';
-import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 const windowWidth = Dimensions.get('window').width;
 
@@ -76,41 +75,38 @@ const Explore = ({ theme, navigation }) => {
 						setModalVisible(false)
 					}}>
 					<BackgroundContainer3 hasMarginTop={false}>
-						<View {...theme.Container}>
-							<View>
-								<View style={{ alignItems: 'center', marginBottom: 10 }}>
-									{
-										selectedExerciseModal && (
-											<View>
-												<View style={{ paddingHorizontal: 20 }}>
-													<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21, marginBottom: 10 }}>{selectedExerciseModal.showableName}</Text>
-												</View>
-												<Video
-													source={selectedExerciseModal.gif}
-													rate={1.0}
-													volume={1.0}
-													isMuted={false}
-													resizeMode="contain"
-													shouldPlay
-													isLooping
-													style={{ width: windowWidth, height: 300, marginBottom: 20 }}
-												/>
-												<ScrollView>
-													<Text style={{ textAlign: 'center', color: "#e5dfdf", fontFamily: 'Raleway-Regular', fontSize: 17, marginBottom: 10, marginHorizontal: 10 }}>
-														{selectedExerciseModal.description}
-													</Text>
-												</ScrollView>
-											</View>
-										)
-									}
+					{
+							selectedExerciseModal && (
+								<View style={{justifyContent: 'space-between',flex:1}}>
+									<View style={{flex: 2}}>
+										<View style={{ padding: 20}}>
+											<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21 }}>{selectedExerciseModal.showableName}</Text>
+										</View>
+										<View style={{flex: 1, backgroundColor: 'black'}} >
+											<Image 
+												style={{flex: 1,width: null,height: null,resizeMode: 'contain'}}
+												source={selectedExerciseModal.gif}
+											/>
+										</View>
+									</View>
+									<View style={{flex: 1,  padding: 20}}>
+										<ScrollView style={{marginBottom: 10}} >
+											<Text style={{ textAlign: 'center', color: "#e5dfdf", fontFamily: 'Raleway-Regular', fontSize: 17 }}>
+												{selectedExerciseModal.description}
+											</Text>
+										</ScrollView>
+										<View >
+											<TouchableOpacity 
+												activeOpacity={1} 
+												style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center" }} 
+												onPress={() => { setModalVisible(!modalVisible); }}>
+												<Text {...theme.TouchableOpacityText}>Cerrar</Text>
+											</TouchableOpacity>
+										</View>
+									</View>
 								</View>
-							</View>
-						</View>
-						<View style={{ padding: 20 }}>
-							<TouchableOpacity activeOpacity={1} style={{ elevation: 5, backgroundColor: "rgb(65,189,252)", paddingVertical: 20, paddingHorizontal: 50, borderRadius: 5, alignItems: "center", marginVertical: 10 }} onPress={() => { setModalVisible(!modalVisible); }}>
-								<Text {...theme.TouchableOpacityText}>Cerrar</Text>
-							</TouchableOpacity>
-						</View>
+							)
+						}
 					</BackgroundContainer3>
 				</Modal>
 

@@ -5,11 +5,10 @@ import {
 	TouchableOpacity,
 	ProgressBarAndroid,
 	Dimensions,
-	Alert
+	Alert,Image
 } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
 import { Audio } from 'expo-av';
-import { Video } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
@@ -18,7 +17,6 @@ const windowWidth = Dimensions.get('window').width;
 
 const StartRoutine = ({ theme, navigation, route }) => {
 
-	var _videoRef;
 	const exerciseTime = 20;
 	const restTime = 10;
 
@@ -148,47 +146,32 @@ const StartRoutine = ({ theme, navigation, route }) => {
 		return (currentExercise / route.params.routine.length)
 	}
 
-	const _handleVideoRef = component => {
-		const playbackObject = component;
-		if(playbackObject){
-			//console.log(playbackObject.error);
-
-		}
-	}
-
 	return (
 		<BackgroundContainer3 error={isRest} success={isExercise} >
-			<View {...theme.Container}>
-				<View style={{ flex: 4 }}>
-					<View style={{ flex: 1 }}>
-						<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 19, textAlign: "center" }}>{route.params.routine[currentExercise].name}</Text>
+			<View style={{justifyContent: 'space-between',flex:1}}>
+				<View style={{flex: 4}}>
+					<View style={{ padding: 20}}>
+						<Text style={{ color: "#e5dfdf", fontFamily: 'Raleway-Bold', fontSize: 21,textAlign:'center' }}>{route.params.routine[currentExercise].name}</Text>
 					</View>
-					<View style={{ flex: 7 }}>
-						<Video
-							resizeMode={Video.RESIZE_MODE_COVER}
-							isMuted={true}
-							isLooping= {true}
-							shouldPlay= {true}
+					<View style={{flex: 1, backgroundColor: 'black'}} >
+						<Image 
+							style={{flex: 1,width: null,height: null,resizeMode: 'contain'}}
 							source={route.params.routine[currentExercise].gif}
-							ref={(ref) => _handleVideoRef(ref)}
-							useNativeControls={false}
-							style={{ width: windowWidth, height: "100%" }}
 						/>
-
 					</View>
 				</View>
-				<View style={{ flex: 1 }}>
+				<View style={{flex: 1,  padding: 20}}>
 					<View style={{ flexDirection: 'row', justifyContent: 'center' }} >
 						<View style={{ marginHorizontal: 10 }}>
 							{isRest ?
 								<Text style={{ textAlign: 'center' }}  >
-									<MaterialCommunityIcons name="progress-clock" size={55} color="white" />
+									<MaterialCommunityIcons name="progress-clock" size={40} color="white" />
 									<Text style={{ color: "#FF0000", fontSize: 60, textAlign: "center" }}>
 										{secondsRest.toSS()}
 									</Text>
 								</Text> :
 								<Text style={{ textAlign: 'center' }} >
-									<MaterialCommunityIcons name="progress-clock" size={55} color="white" />
+									<MaterialCommunityIcons name="progress-clock" size={40} color="white" />
 									<Text style={{ color: "#00FF00", fontSize: 60, textAlign: "center" }}>
 										{secondsExercise.toSS()}
 									</Text>
@@ -202,7 +185,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 							</TouchableOpacity>
 						</View>
 					</View>
-					<View >
+					<View>
 						<ProgressBarAndroid
 							{...theme.ProgressBarAndroid}
 							styleAttr="Horizontal"

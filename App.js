@@ -89,12 +89,16 @@ export default function App() {
           'Raleway-Light': require('./assets/fonts/Raleway-Light.ttf'),
         });
 
-        const imageAssets = cacheAssets();
-        const chainsAssets = cacheChains();
-        const exercisesAssets = cacheExercises();
+        console.log("LOADING");
+        const imageAssets = await cacheAssets();
+        console.log("ASSETS...");
+        const chainsAssets = await cacheChains();
+        console.log("CHAINS...");
+        const exercisesAssets = await cacheExercises();
+        console.log("EXERCISES");
 
-        await Promise.all([...imageAssets,...chainsAssets,...exercisesAssets]);
-
+        //await Promise.all([...imageAssets,...chainsAssets,...exercisesAssets]);
+//
         storedProfile = await AsyncStorage.getItem('@profile');
         setProfile(JSON.parse(storedProfile));
 
