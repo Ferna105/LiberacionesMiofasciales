@@ -3,15 +3,9 @@ import {
 	Text,
 	View,
 	TouchableOpacity,
-	Image,
-	FlatList,
-	ScrollView,
-	Modal,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withTheme } from '@theme/themeProvider';
-import { getRoutineByRid } from '@theme/queries';
-import AccessoryExercises from './../AccessoryExercises';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 
 const AddAccessory = ({theme,navigation,route}) => {

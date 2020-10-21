@@ -9,6 +9,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "assetBundlePatterns": [
+      "./assets/Cadenas/*",
+      "./assets/images/*",
+      "./assets/slider/*"
+    ],
     "ios": {
       "bundleIdentifier": "com.liberacionesmiofaciales.liberacionesmiofaciales",
       "buildNumber": "1.0.1"

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { TouchableOpacity, View, Text, ScrollView, Alert } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { CheckBox,ListItem } from 'react-native-elements';
 
 import { withTheme } from '@theme/themeProvider';

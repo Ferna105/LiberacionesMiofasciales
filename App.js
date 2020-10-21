@@ -10,6 +10,7 @@ import { AuthContext } from '@components/context';
 import { AsyncStorage } from 'react-native';
 import {getExercises,getChains} from '@theme/queries';
 import { Asset } from 'expo-asset';
+import { Ionicons,MaterialCommunityIcons,AntDesign } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 
@@ -79,26 +80,30 @@ export default function App() {
 
   }
 
+  const cacheFonts = (fonts) => {
+    return fonts.map(font => Font.loadAsync(font));
+  }
+
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        await Font.loadAsync({
-          'Raleway-Regular': require('./assets/fonts/Raleway-Regular.ttf'),
-          'Raleway-Bold': require('./assets/fonts/Raleway-Bold.ttf'),
-          'Raleway-Italic': require('./assets/fonts/Raleway-Italic.ttf'),
-          'Raleway-Light': require('./assets/fonts/Raleway-Light.ttf'),
-        });
 
-        console.log("LOADING");
-        const imageAssets = await cacheAssets();
-        console.log("ASSETS...");
-        const chainsAssets = await cacheChains();
-        console.log("CHAINS...");
-        const exercisesAssets = await cacheExercises();
-        console.log("EXERCISES");
+        const fontAssets = cacheFonts([
+          Ionicons.font,
+          MaterialCommunityIcons.font,
+          AntDesign.font,
+          {
+            'Raleway-Regular': require('./assets/fonts/Raleway-Regular.ttf'),
+            'Raleway-Bold': require('./assets/fonts/Raleway-Bold.ttf'),
+            'Raleway-Italic': require('./assets/fonts/Raleway-Italic.ttf'),
+            'Raleway-Light': require('./assets/fonts/Raleway-Light.ttf'),
+          }
+        ]);
+        
+        await Promise.all([...fontAssets]);
 
-        //await Promise.all([...imageAssets,...chainsAssets,...exercisesAssets]);
-//
+        cacheExercises();
+
         storedProfile = await AsyncStorage.getItem('@profile');
         setProfile(JSON.parse(storedProfile));
 

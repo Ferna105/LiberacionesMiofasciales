@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Button, View, AsyncStorage, Switch, ScrollView, Text, TouchableOpacity } from 'react-native';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 import { withTheme } from '@theme/themeProvider';
-import { Ionicons } from '@expo/vector-icons';
 import { CheckBox, ListItem } from 'react-native-elements';
 import database from '@theme/database.js';
 

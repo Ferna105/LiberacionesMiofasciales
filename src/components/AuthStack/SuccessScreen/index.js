@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { withTheme } from '@theme/themeProvider';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '@components/context';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 
