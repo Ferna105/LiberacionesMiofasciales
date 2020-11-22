@@ -10,7 +10,7 @@ import { AuthContext } from '@components/context';
 import { AsyncStorage } from 'react-native';
 import {getExercises,getChains} from '@theme/queries';
 import { Asset } from 'expo-asset';
-import { Ionicons,MaterialCommunityIcons,AntDesign } from '@expo/vector-icons';
+import { Ionicons,MaterialCommunityIcons,AntDesign,FontAwesome } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 
@@ -92,6 +92,7 @@ export default function App() {
           Ionicons.font,
           MaterialCommunityIcons.font,
           AntDesign.font,
+          FontAwesome.font,
           {
             'Raleway-Regular': require('./assets/fonts/Raleway-Regular.ttf'),
             'Raleway-Bold': require('./assets/fonts/Raleway-Bold.ttf'),
