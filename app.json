@@ -2,7 +2,7 @@
   "expo": {
     "name": "Liberación Miofascial",
     "icon": "./assets/images/icon.png",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "slug": "LiberacionMiofacial",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -16,16 +16,17 @@
     ],
     "ios": {
       "bundleIdentifier": "com.liberacionesmiofaciales.liberacionesmiofaciales",
-      "buildNumber": "1.0.2"
+      "buildNumber": "1.0.3"
     },
     "android": {
       "package": "com.liberacionesmiofaciales.liberacionesmiofaciales",
-      "versionCode": 3
+      "versionCode": 4
     },
     "extra": {
       "eas": {
         "projectId": "b77b8d3d-0035-4ef2-bf8c-3e8cca3d17e1"
       }
-    }
+    },
+    "permissions": []
   }
 }
