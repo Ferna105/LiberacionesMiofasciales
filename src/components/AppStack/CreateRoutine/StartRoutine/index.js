@@ -11,7 +11,7 @@ import { withTheme } from '@theme/themeProvider';
 import { Audio } from 'expo-av';
 import BackgroundContainer3 from '@components/BackgroundContainer3';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -47,7 +47,7 @@ const StartRoutine = ({ theme, navigation, route }) => {
 	}, [seconds]);
 
 	useEffect(() => {
-		activateKeepAwake();
+		activateKeepAwakeAsync();
 
 		let totalInterval = null;
 		totalInterval = setTimeout(() => {

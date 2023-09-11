@@ -7,7 +7,7 @@ import SplashScreen from './src/components/SplashScreen';
 import { ThemeContextProvider } from './src/core/themeProvider';
 import * as Font from 'expo-font';
 import { AuthContext } from '@components/context';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getExercises,getChains} from '@theme/queries';
 import { Asset } from 'expo-asset';
 import { Ionicons,MaterialCommunityIcons,AntDesign,FontAwesome } from '@expo/vector-icons';
