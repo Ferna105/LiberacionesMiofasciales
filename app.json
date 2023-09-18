@@ -20,7 +20,8 @@
     },
     "android": {
       "package": "com.liberacionesmiofaciales.liberacionesmiofaciales",
-      "versionCode": 5
+      "versionCode": 5,
+      "permissions": []
     },
     "extra": {
       "eas": {
