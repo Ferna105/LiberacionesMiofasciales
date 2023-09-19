@@ -34,8 +34,8 @@ const AppStack = ({theme}) => {
         headerTitleStyle: theme.Header.titleStyle,
         headerTransparent: true,
         ...TransitionPresets.SlideFromRightIOS,
+        headerMode: "screen",
       }}
-      headerMode="screen"
     >
       <Stack.Screen 
         name="HomeScreen" 

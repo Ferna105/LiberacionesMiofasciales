@@ -166,8 +166,8 @@ const HomeScreen = ({ navigation, theme }) => {
 			}
 		}
 		return (
-			<View style={{ padding: 30, flex: 1 }}>
-				<View style={{ alignItems: 'center', justifyContent: 'center', flex: 2, flexDirection: 'row' }}>
+			<View style={{ padding: 30, flex: 1}}>
+				<View style={{ alignItems: 'center', flex: 1, justifyContent: 'center', flexDirection: 'row' }}>
 					<Image style={{ resizeMode: 'stretch', width: 150, height: 150, marginHorizontal: 20 }} source={imagePath} />
 				</View>
 				<View style={{ flex: 1 }}>
@@ -196,6 +196,7 @@ const HomeScreen = ({ navigation, theme }) => {
 						sliderWidth={screenWidth - 100}
 						onSnapToItem={(index) => setActiveSlide(index) }
 						itemWidth={screenWidth - 100}
+						pagingEnabled
 					/>
 					<TouchableOpacity onPress={() => carousel.snapToItem(activeSlide + 1)} style={{height: "100%", justifyContent: 'center', alignItems: 'center', marginRight: 20}}>
 						<AntDesign size={30} style={{color: "white"}} name="rightcircleo" />
